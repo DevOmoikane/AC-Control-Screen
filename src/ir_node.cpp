@@ -27,6 +27,7 @@ uint32_t previousSeq = 0;
 bool havePreviousSeq = false;
 ac::Result previousResult = ac::Result::InvalidCommand;
 uint32_t lastHello = 0;
+uint32_t lastRemoteFrame = 0;
 bool irReady = false;
 
 bool addPeer(const uint8_t* mac) {
@@ -115,7 +116,12 @@ ac::Result sendIr(const ac::Frame& f) {
 
 void sendHello(const uint8_t* address = BROADCAST) {
   ac::Frame f = ac::hello(ac::Role::IrNode);
-  esp_now_send(address, reinterpret_cast<const uint8_t*>(&f), sizeof(f));
+  const esp_err_t err = esp_now_send(address, reinterpret_cast<const uint8_t*>(&f), sizeof(f));
+  if (err != ESP_OK) {
+    Serial.printf("hello to %02X:%02X:%02X:%02X:%02X:%02X failed: %d\n",
+                  address[0],address[1],address[2],address[3],address[4],address[5],
+                  (int)err);
+  }
 }
 
 void process(const Incoming& in) {
@@ -125,14 +131,21 @@ void process(const Incoming& in) {
   // Security note: this is identification, NOT cryptographic authentication.
   if (haveRemote && memcmp(remoteMac, in.mac, 6) != 0) return;
   if (!addPeer(in.mac)) return;
+  lastRemoteFrame = millis();
   if (!haveRemote) {
     memcpy(remoteMac, in.mac, 6);
     haveRemote = true;
     Serial.printf("Paired remote %02X:%02X:%02X:%02X:%02X:%02X\n",
                   in.mac[0],in.mac[1],in.mac[2],in.mac[3],in.mac[4],in.mac[5]);
-    sendHello(in.mac);
   }
-  if (f.type == static_cast<uint8_t>(ac::Type::Hello)) return;
+  if (f.type == static_cast<uint8_t>(ac::Type::Hello)) {
+    // Answer every hello, not just the first one. The reply goes out on the
+    // channel the request just arrived on, so the remote finds us even when
+    // our own channel setting drifts -- a disconnected station keeps
+    // scanning other channels and would otherwise lose its own broadcasts.
+    sendHello(in.mac);
+    return;
+  }
   if (f.type != static_cast<uint8_t>(ac::Type::Command)) return;
   ac::Result result;
   if (havePreviousSeq && f.seq == previousSeq) {
@@ -189,6 +202,13 @@ void loop() {
     // re-assert the channel before every advertisement.
     esp_wifi_set_channel(ESPNOW_CHANNEL, WIFI_SECOND_CHAN_NONE);
     sendHello();
+  }
+  static uint32_t lastStatusLog = 0;
+  if (millis() - lastStatusLog > 5000) {
+    lastStatusLog = millis();
+    Serial.printf("channel %d, remote %s, last frame from remote %lums ago\n",
+                  WiFi.channel(), haveRemote ? "paired" : "none",
+                  (unsigned long)(millis() - lastRemoteFrame));
   }
   delay(5);
 }

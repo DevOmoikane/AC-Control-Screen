@@ -7,13 +7,13 @@
 constexpr unsigned char ESPNOW_CHANNEL = 5;
 
 // Opt-in MQTT + Wi-Fi on the CYD. Leave false for ESP-NOW-only operation.
-constexpr bool ENABLE_MQTT = true;
-constexpr char WIFI_SSID[] = "omoikane";
-constexpr char WIFI_PASSWORD[] = "D3v0m01k4n3";
-constexpr char MQTT_HOST[] = "10.73.19.192";
+constexpr bool ENABLE_MQTT = false;
+constexpr char WIFI_SSID[] = "";//"omoikane";
+constexpr char WIFI_PASSWORD[] = "";//"D3v0m01k4n3";
+constexpr char MQTT_HOST[] = "";//"10.73.19.192";
 constexpr unsigned short MQTT_PORT = 1883;
-constexpr char MQTT_USERNAME[] = "mqttclient";
-constexpr char MQTT_PASSWORD[] = "k4m1z4m4";
+constexpr char MQTT_USERNAME[] = "";//"mqttclient";
+constexpr char MQTT_PASSWORD[] = "";//"k4m1z4m4";
 constexpr char MQTT_TOPIC_BASE[] = "home/ac/espnow";
 
 // IR node uses two independent ESP32-C3 RMT TX channels.

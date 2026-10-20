@@ -121,11 +121,12 @@ void onReceive(const uint8_t* mac, const uint8_t* data, int len) {
 
 void broadcastHello() {
   const ac::Frame f = ac::hello(ac::Role::Remote);
-  esp_now_send(BROADCAST, reinterpret_cast<const uint8_t*>(&f), sizeof(f));
+  const esp_err_t err = esp_now_send(BROADCAST, reinterpret_cast<const uint8_t*>(&f), sizeof(f));
+  if (err != ESP_OK) Serial.printf("hello broadcast failed: %d\n", (int)err);
 }
 
 void processIncoming(const Incoming& in) {
-  const auto& f = in.frame;
+  const ac::Frame& f = in.frame;
   if (f.role != static_cast<uint8_t>(ac::Role::IrNode)) return;
   if (haveIrMac && memcmp(in.mac, irMac, 6) != 0) return;
   if (!addPeer(in.mac)) return;
@@ -137,6 +138,13 @@ void processIncoming(const Incoming& in) {
   }
   lastNodeHello = millis();
   linkDirty = true;
+  if (f.type == static_cast<uint8_t>(ac::Type::Hello)) {
+    static uint32_t lastHelloLog = 0;
+    if (millis() - lastHelloLog > 3000) {
+      lastHelloLog = millis();
+      Serial.printf("IR node hello, channel %d\n", WiFi.channel());
+    }
+  }
   if (f.type != static_cast<uint8_t>(ac::Type::Ack)) return;
   if (!hasPending || f.seq != pending.seq || f.action != pending.action) return;
   hasPending = false;

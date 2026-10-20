@@ -190,8 +190,21 @@ This protocol was reverse-engineered for the RG57A7/BGEF family. Your exact unit
 
 ## Link details
 
-- ESP-NOW discovery broadcasts every ~2.5 seconds.
-- The first discovered matching peer is selected for the current boot; only one controller / IR node pair is supported.
+- The CYD broadcasts a Hello every ~2.8 s; the IR node **answers every Hello**
+  with a unicast Hello. The answer goes out on the channel the request just
+  arrived on, so the two devices find each other even when their channel
+  settings drift — a disconnected Wi-Fi station keeps scanning other channels
+  and would lose its own periodic broadcasts.
+- The IR node also broadcasts a Hello every ~2.5 s as a fallback, and the CYD
+  treats any frame from the IR node as a link signal.
+- The link is considered up while a frame from the IR node arrived within the
+  last 9 s.
+- **Both sides must be on the same channel.** With MQTT enabled the CYD uses
+  the router's channel, so `ESPNOW_CHANNEL` must be set to the router's channel
+  (the CYD prints it at boot) for the IR node to use. Without MQTT both use
+  `ESPNOW_CHANNEL`.
+- Each side locks onto the first peer it hears and ignores others until it
+  restarts, so only one controller / IR-node pair is supported.
 - Commands carry sequence numbers. Receiver remembers the latest completed sequence and repeats its ACK without repeating the IR signal if the same command is retried.
 - Remote waits for node-side ACK; it retries up to 4 attempts with 550 ms between attempts. Dropped commands are reported on the display.
 - The link is **not encrypted or authenticated** in this prototype. Auto-pairing is convenient but does not provide protection from nearby attackers or other custom ESP-NOW senders. Do not treat MAC addresses as security credentials. Add explicit PSK/LMK-based encryption and a provisioning flow before deploying in an untrusted radio environment.
