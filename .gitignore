@@ -1,0 +1,8 @@
+.pio/
+.vscode/
+.DS_Store
+*.bin
+*.elf
+
+# EEZ Studio AppImage extraction (see ac-control-cyberpunk/build-eez.sh)
+ac-control-cyberpunk/squashfs-root/
