@@ -112,6 +112,81 @@ Run the **host-side** (no MCU required) codec tests on Linux/macOS with `g++`:
 ./tests/run.sh
 ```
 
+## Cloning the original remote (IR receiver)
+
+The IR node can listen to the original RG57 remote through a 38 kHz receiver
+module (TSOP38238 / VS1838B style) on **GPIO4**, so the protocol can be
+verified against the real handset before the encoder is changed.
+
+```c
+// include/AcConfig.h
+constexpr bool IR_RX_ENABLED = true;
+constexpr int IR_RX_PIN = 4;
+constexpr int IR_RX_PULL = 0;  // 0 = none, 1 = pull-up, 2 = pull-down
+```
+
+### Wiring
+
+| Receiver | ESP32-C3 |
+| --- | --- |
+| VCC | **3.3 V** — a module powered at 5 V drives its output to 5 V, which the C3's GPIO cannot tolerate |
+| GND | GND, common with the C3 |
+| OUT | GPIO4 |
+
+Most 38 kHz modules (TSOP38238, VS1838B) have a **push-pull** output and need
+no pull at all, which is why `IR_RX_PULL` defaults to 0. A module with an
+**open-collector** output needs a pull-**up** (`IR_RX_PULL = 1`); with a pull-down
+the line would sit low forever and no edge would ever arrive.
+
+### Diagnostics
+
+The IR node's status line reports the input activity every five seconds:
+
+```text
+radio channel 5 (want 5), remote paired, last frame from remote 1ms ago, ir interrupts 0, ir pulses 0, ir level LOW
+```
+
+- `ir interrupts 0` — the pin never changes: the module is not driving it.
+  Check VCC, GND, and that OUT really reaches GPIO4. To separate wiring from
+  firmware, disconnect the module and briefly bridge GPIO4 to GND with a
+  jumper: the counter must jump.
+- `ir interrupts` growing but no burst printed — the capture works but the
+  burst analysis is not seeing it.
+- `ir pulses` growing — pulses are arriving and are long enough to be real;
+  the raw trace will follow.
+- `ir level` — the level the pin is at right now.
+
+The module is demodulated by the receiver, so the firmware only has to measure
+pulse widths. Every edge is captured in a GPIO interrupt, so the timings do not
+depend on polling. **No protocol is assumed** — the node reports the raw trace
+plus a histogram of the pulse widths, which is what identifies an unknown
+encoding:
+
+```text
+[ir rx] burst of 98 edges
+[ir rx] raw (level:width us):
+[ir rx]  H:4350  L:4400  H:560  L:560  H:560  L:1690 ...
+[ir rx] pulse width histogram (level:width us x count):
+[ir rx]   H:4350   x 1
+[ir rx]   H:560    x 48
+[ir rx]   L:560    x 18
+[ir rx]   L:1690   x 30
+[ir rx] long pulses (>= 1500 us): H:4350 L:4400
+[ir rx] 98 edges, 4 distinct widths, 2 long pulses
+```
+
+The histogram is the useful part for an unfamiliar remote: a mark/space scheme
+shows up as a small set of distinct widths, and the long pulses delimit the
+frame.
+
+The Midea-specific decode lives in `include/IrDecode.h` and is exercised by
+`tests/test_ir_decode.cpp`, but the firmware does not use it — the receiver
+currently sees a different remote.
+
+```sh
+./tests/run.sh
+```
+
 ## Display controls
 
 The CYD runs an LVGL 9.4 UI with three screens, laid out in EEZ Studio:
@@ -190,19 +265,24 @@ This protocol was reverse-engineered for the RG57A7/BGEF family. Your exact unit
 
 ## Link details
 
-- The CYD broadcasts a Hello every ~2.8 s; the IR node **answers every Hello**
-  with a unicast Hello. The answer goes out on the channel the request just
-  arrived on, so the two devices find each other even when their channel
-  settings drift — a disconnected Wi-Fi station keeps scanning other channels
-  and would lose its own periodic broadcasts.
-- The IR node also broadcasts a Hello every ~2.5 s as a fallback, and the CYD
-  treats any frame from the IR node as a link signal.
+- **A disconnected Wi-Fi station keeps scanning other channels.** An ESP-NOW
+  frame is over in ~200 µs, so it only gets through when the receiver's radio
+  happens to be on the right channel. `WiFi.channel()` reports the *configured*
+  channel, not where the radio actually is.
+- Two things keep the radio where it needs to be: each side **re-asserts the
+  channel every 200 ms**, and a Hello is **answered straight from the receive
+  callback**, so the reply goes out within microseconds of the request, while
+  the radio is provably on the right channel.
+- The CYD advertises a Hello every second, both broadcast and — once the IR
+  node is known — unicast to it. The IR node answers every Hello.
 - The link is considered up while a frame from the IR node arrived within the
-  last 9 s.
-- **Both sides must be on the same channel.** With MQTT enabled the CYD uses
-  the router's channel, so `ESPNOW_CHANNEL` must be set to the router's channel
-  (the CYD prints it at boot) for the IR node to use. Without MQTT both use
-  `ESPNOW_CHANNEL`.
+  last 20 s.
+- **Both sides must be on the same channel.** Without MQTT both use
+  `ESPNOW_CHANNEL`. With MQTT the CYD follows the router's channel, so
+  `ESPNOW_CHANNEL` must be set to the router's channel for the IR node, and
+  the CYD must not re-assert the channel itself.
+- The IR node prints its **actual** radio channel every 5 s, next to the
+  wanted one — if the two differ, the radio is still scanning.
 - Each side locks onto the first peer it hears and ignores others until it
   restarts, so only one controller / IR-node pair is supported.
 - Commands carry sequence numbers. Receiver remembers the latest completed sequence and repeats its ACK without repeating the IR signal if the same command is retried.

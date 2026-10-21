@@ -24,8 +24,8 @@ namespace {
 constexpr uint8_t BROADCAST[6] = {0xFF,0xFF,0xFF,0xFF,0xFF,0xFF};
 constexpr uint8_t TP_SCLK = 25, TP_MISO = 39, TP_MOSI = 32, TP_CS = 33, TP_IRQ = 36;
 constexpr uint8_t TFT_BACKLIGHT = 21;
-constexpr unsigned long HELLO_INTERVAL_MS = 2800;
-constexpr unsigned long LINK_TIMEOUT_MS = 9000;
+constexpr unsigned long HELLO_INTERVAL_MS = 1000;
+constexpr unsigned long LINK_TIMEOUT_MS = 20000;
 constexpr unsigned long RETRY_INTERVAL_MS = 550;
 constexpr int MAX_ATTEMPTS = 4;
 constexpr uint8_t MAX_QUEUED = 8;
@@ -116,13 +116,29 @@ void onReceive(const uint8_t* mac, const uint8_t* data, int len) {
   Incoming in{};
   memcpy(in.mac, mac, 6);
   memcpy(&in.frame, data, sizeof(in.frame));
-  if (ac::validFrame(in.frame)) xQueueSend(incomingQueue, &in, 0);
+  if (!ac::validFrame(in.frame)) return;
+
+  // Answer a Hello right here, in the Wi-Fi task, so the reply goes out on
+  // the channel the request just arrived on rather than on whatever channel
+  // the radio has drifted to by the time the main loop runs.
+  if (in.frame.role == static_cast<uint8_t>(ac::Role::IrNode) &&
+      in.frame.type == static_cast<uint8_t>(ac::Type::Hello)) {
+    ac::Frame reply = ac::hello(ac::Role::Remote);
+    esp_now_send(mac, reinterpret_cast<const uint8_t*>(&reply), sizeof(reply));
+  }
+  xQueueSend(incomingQueue, &in, 0);
 }
 
 void broadcastHello() {
   const ac::Frame f = ac::hello(ac::Role::Remote);
   const esp_err_t err = esp_now_send(BROADCAST, reinterpret_cast<const uint8_t*>(&f), sizeof(f));
   if (err != ESP_OK) Serial.printf("hello broadcast failed: %d\n", (int)err);
+  // Also address the known IR node directly: a broadcast only gets through
+  // when the receiver's radio happens to be on our channel, and a unicast
+  // to a known peer is much more likely to be received.
+  if (haveIrMac) {
+    esp_now_send(irMac, reinterpret_cast<const uint8_t*>(&f), sizeof(f));
+  }
 }
 
 void processIncoming(const Incoming& in) {
@@ -534,6 +550,55 @@ void styleButtons() {
   styleButtonsRec(objects.network);
 }
 
+// A short lived message on top of the current screen. The bridge's status
+// text lives on the Network screen, which is not where the user is when a
+// button does not do what they expect.
+lv_obj_t* g_toast[3] = {nullptr, nullptr, nullptr};
+uint32_t g_toastUntil = 0;
+
+void initToast() {
+  lv_obj_t* screens[3] = {objects.main, objects.extras, objects.network};
+  for (int i = 0; i < 3; i++) {
+    if (!screens[i]) continue;
+    lv_obj_t* t = lv_label_create(screens[i]);
+    lv_label_set_long_mode(t, LV_LABEL_LONG_CLIP);
+    lv_obj_set_width(t, 296);
+    lv_obj_set_pos(t, 12, 38);
+    lv_obj_set_style_bg_color(t, lv_color_hex(0x14243B), 0);
+    lv_obj_set_style_bg_opa(t, 240, 0);
+    lv_obj_set_style_border_color(t, lv_color_hex(0x14E6F4), 0);
+    lv_obj_set_style_border_width(t, 1, 0);
+    lv_obj_set_style_radius(t, 6, 0);
+    lv_obj_set_style_pad_all(t, 6, 0);
+    lv_obj_set_style_text_color(t, lv_color_hex(0x14E6F4), 0);
+    lv_obj_set_style_text_font(t, &lv_font_montserrat_12, 0);
+    lv_obj_add_flag(t, LV_OBJ_FLAG_HIDDEN);
+    g_toast[i] = t;
+  }
+}
+
+void showToast(const char* msg) {
+  if (!msg || !msg[0] || !g_toast[0]) return;
+  lv_obj_t* act = lv_screen_active();
+  int idx = -1;
+  if (act == objects.main) idx = 0;
+  else if (act == objects.extras) idx = 1;
+  else if (act == objects.network) idx = 2;
+  if (idx < 0 || !g_toast[idx]) return;
+  lv_label_set_text(g_toast[idx], msg);
+  lv_obj_clear_flag(g_toast[idx], LV_OBJ_FLAG_HIDDEN);
+  lv_obj_move_foreground(g_toast[idx]);
+  g_toastUntil = millis() + 3500;
+}
+
+void updateToast() {
+  if (!g_toastUntil || millis() < g_toastUntil) return;
+  for (int i = 0; i < 3; i++) {
+    if (g_toast[i]) lv_obj_add_flag(g_toast[i], LV_OBJ_FLAG_HIDDEN);
+  }
+  g_toastUntil = 0;
+}
+
 // Force LVGL's default theme to the dark palette with the project's own
 // accent colours. The theme is a singleton, so re-initialising it after
 // ui_init() re-styles it; the widgets' own local styles still win.
@@ -574,6 +639,7 @@ void setupLvgl() {
   ui_init();
   applyDarkTheme();
   styleButtons();
+  initToast();
 }
 
 void setupRadio() {
@@ -631,15 +697,17 @@ extern "C" void ac_ui_send_state(const ac_ui_state_t* s) {
 
   // Mode: the wire protocol only carries Cool / Auto / Heat.
   uint8_t mode = static_cast<uint8_t>(ac::Mode::Cool);
+  bool modeOk = true;
   switch (s->mode) {
     case 0: mode = static_cast<uint8_t>(ac::Mode::Auto); break;
     case 1: mode = static_cast<uint8_t>(ac::Mode::Cool); break;
     case 4: mode = static_cast<uint8_t>(ac::Mode::Heat); break;
     default:
-      note = "DRY/FAN not supported by the IR protocol";
+      modeOk = false;
+      note = "DRY and FAN modes are not in the IR protocol";
       break;
   }
-  if (!note && desired.mode != mode) {
+  if (modeOk && desired.mode != mode) {
     desired.mode = mode;
     changed = true;
   }
@@ -684,7 +752,21 @@ extern "C" void ac_ui_send_state(const ac_ui_state_t* s) {
     if (desired.power || wasPoweredOn || applied.power)
       enqueue(ac::Action::SetState);
   }
-  if (note) ac_ui_set_link_status(linked(), note);
+  if (note) {
+    ac_ui_set_link_status(linked(), note);
+    showToast(note);
+    // Put back what the AC can actually do, so the display never disagrees
+    // with the air conditioner.
+    ac_ui_state_t real = *ac_ui_current_state();
+    real.temperature_c = desired.tempC;
+    real.power = desired.power;
+    real.mode = acModeToUi(desired.mode);
+    real.fan = desired.fan;
+    real.swing = 0;
+    real.eco = 0;
+    real.sleep = 0;
+    ac_ui_apply_remote_state(&real);
+  }
 }
 
 extern "C" void ac_ui_start_pairing(void) {
@@ -697,12 +779,14 @@ extern "C" void ac_ui_start_pairing(void) {
   broadcastHello();
   linkDirty = true;
   ac_ui_set_link_status(0, "Pairing: waiting for an IR node");
+  showToast("Looking for an IR node...");
 }
 
 extern "C" void ac_ui_request_status(void) {
   broadcastHello();
   linkDirty = true;
   ac_ui_set_link_status(linked(), linked() ? "IR node online" : "No IR node answer");
+  showToast(linked() ? "IR node online" : "No IR node answer");
 }
 
 void reportUiState() {
@@ -774,12 +858,17 @@ void loop() {
     while (xQueueReceive(incomingQueue, &in, 0) == pdTRUE) processIncoming(in);
     if (millis() - lastHelloSent >= HELLO_INTERVAL_MS) {
       lastHelloSent = millis();
-      // A disconnected station keeps scanning and drifts off the data channel,
-      // so re-assert the channel before every advertisement. With MQTT the
-      // station has to stay on the router's channel instead, so only do this
-      // in ESP-NOW-only mode.
-      if (!ENABLE_MQTT) esp_wifi_set_channel(ESPNOW_CHANNEL, WIFI_SECOND_CHAN_NONE);
-      broadcastHello();
+      // A disconnected station keeps scanning other channels, so the radio is
+      // rarely on the data channel when a frame arrives. Re-asserting the
+      // channel often pulls the radio back and keeps it listening where we
+      // want it. With MQTT the station has to stay on the router's channel
+      // instead, so only do this in ESP-NOW-only mode.
+      if (!ENABLE_MQTT) {
+        esp_wifi_set_channel(ESPNOW_CHANNEL, WIFI_SECOND_CHAN_NONE);
+        broadcastHello();
+      } else {
+        broadcastHello();
+      }
     }
     updateCommands();
   }
@@ -795,6 +884,7 @@ void loop() {
   // change is picked up by the redraw in the same pass.
   if (g_disp) {
     ui_tick();
+    updateToast();
     lv_timer_handler();
   }
   delay(5);

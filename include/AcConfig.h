@@ -16,6 +16,17 @@ constexpr char MQTT_USERNAME[] = "";//"mqttclient";
 constexpr char MQTT_PASSWORD[] = "";//"k4m1z4m4";
 constexpr char MQTT_TOPIC_BASE[] = "home/ac/espnow";
 
+// IR receiver on the IR node, used to capture the original remote's frames.
+constexpr bool IR_RX_ENABLED = true;
+constexpr int IR_RX_PIN = 4;
+// Internal pull on the receiver's output.
+//   1 = pull-up (default), 2 = pull-down, 0 = none
+// A bare TSOP1838, and many 1838 modules, have an OPEN-COLLECTOR output:
+// without a pull-up the line floats and the pin just picks up noise. An
+// external 10k resistor from OUT to 3.3 V is much better than the internal
+// pull-up, so prefer that if the module allows it.
+constexpr int IR_RX_PULL = 0;
+
 // IR node uses two independent ESP32-C3 RMT TX channels.
 // GPIO2 is a BOOT STRAPPING pin; transistor input must not force it low
 // during reset. Set false for a single LED on GPIO1.

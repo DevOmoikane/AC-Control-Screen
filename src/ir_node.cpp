@@ -10,6 +10,7 @@
 #include "AcConfig.h"
 #include "AcProtocol.h"
 #include "MideaRG57Codec.h"
+#include "IrReceiver.h"
 
 namespace {
 constexpr uint8_t BROADCAST[6] = {0xFF,0xFF,0xFF,0xFF,0xFF,0xFF};
@@ -27,6 +28,7 @@ uint32_t previousSeq = 0;
 bool havePreviousSeq = false;
 ac::Result previousResult = ac::Result::InvalidCommand;
 uint32_t lastHello = 0;
+uint32_t lastChannelFix = 0;
 uint32_t lastRemoteFrame = 0;
 bool irReady = false;
 
@@ -43,9 +45,21 @@ bool addPeer(const uint8_t* mac) {
 void onReceive(const uint8_t* mac, const uint8_t* data, int len) {
   if (len != static_cast<int>(sizeof(ac::Frame)) || !incomingQueue) return;
   Incoming incoming{};
-  memcpy(incoming.mac, mac, sizeof(incoming.mac));
+  memcpy(incoming.mac, mac, 6);
   memcpy(&incoming.frame, data, sizeof(incoming.frame));
-  if (ac::validFrame(incoming.frame)) xQueueSend(incomingQueue, &incoming, 0);
+  if (!ac::validFrame(incoming.frame)) return;
+
+  // Answer a Hello right here, in the Wi-Fi task. The reply then goes out on
+  // the very channel the request just arrived on. Answering later, from the
+  // main loop, means the radio may have moved to a scan channel in between and
+  // the reply is lost -- which is exactly what made the link look dead even
+  // though both sides reported the same channel.
+  if (incoming.frame.role == static_cast<uint8_t>(ac::Role::Remote) &&
+      incoming.frame.type == static_cast<uint8_t>(ac::Type::Hello)) {
+    ac::Frame reply = ac::hello(ac::Role::IrNode);
+    esp_now_send(mac, reinterpret_cast<const uint8_t*>(&reply), sizeof(reply));
+  }
+  xQueueSend(incomingQueue, &incoming, 0);
 }
 
 bool initRmtChannel(gpio_num_t pin, rmt_channel_t channel) {
@@ -132,6 +146,12 @@ void process(const Incoming& in) {
   if (haveRemote && memcmp(remoteMac, in.mac, 6) != 0) return;
   if (!addPeer(in.mac)) return;
   lastRemoteFrame = millis();
+  static uint32_t lastRxLog = 0;
+  if (millis() - lastRxLog > 3000) {
+    lastRxLog = millis();
+    Serial.printf("frame from remote, type %d, channel %d\n", (int)f.type,
+                  WiFi.channel());
+  }
   if (!haveRemote) {
     memcpy(remoteMac, in.mac, 6);
     haveRemote = true;
@@ -139,11 +159,8 @@ void process(const Incoming& in) {
                   in.mac[0],in.mac[1],in.mac[2],in.mac[3],in.mac[4],in.mac[5]);
   }
   if (f.type == static_cast<uint8_t>(ac::Type::Hello)) {
-    // Answer every hello, not just the first one. The reply goes out on the
-    // channel the request just arrived on, so the remote finds us even when
-    // our own channel setting drifts -- a disconnected station keeps
-    // scanning other channels and would otherwise lose its own broadcasts.
-    sendHello(in.mac);
+    // The Hello is already answered in the receive callback, where the reply
+    // still goes out on the channel the request arrived on.
     return;
   }
   if (f.type != static_cast<uint8_t>(ac::Type::Command)) return;
@@ -176,6 +193,7 @@ void setup() {
   irReady = initIr();
   Serial.printf("IR RMT ready: %s (GPIO%d%s)\n", irReady ? "yes" : "NO",
                 IR_LED_PIN_1, USE_SECOND_IR_LED ? ", GPIO2" : "");
+  if (IR_RX_ENABLED) irrx::begin(IR_RX_PIN);
 
   incomingQueue = xQueueCreate(12, sizeof(Incoming));
   if (!incomingQueue) { Serial.println("Queue allocation FAILED"); return; }
@@ -196,19 +214,40 @@ void loop() {
   if (!incomingQueue) { delay(1000); return; }
   Incoming in{};
   while (xQueueReceive(incomingQueue, &in, 0) == pdTRUE) process(in);
+
+  if (IR_RX_ENABLED) irrx::poll();
+
+  // A disconnected station keeps scanning other channels, so the radio is
+  // rarely on the data channel when a frame arrives. Re-asserting the channel
+  // often pulls the radio back and keeps it listening where we want it.
+  if (millis() - lastChannelFix >= 200) {
+    lastChannelFix = millis();
+    esp_wifi_set_channel(ESPNOW_CHANNEL, WIFI_SECOND_CHAN_NONE);
+  }
+
   if (millis() - lastHello >= HELLO_INTERVAL_MS) {
     lastHello = millis();
-    // A disconnected STA keeps scanning and drifts off the data channel, so
-    // re-assert the channel before every advertisement.
     esp_wifi_set_channel(ESPNOW_CHANNEL, WIFI_SECOND_CHAN_NONE);
     sendHello();
   }
   static uint32_t lastStatusLog = 0;
   if (millis() - lastStatusLog > 5000) {
     lastStatusLog = millis();
-    Serial.printf("channel %d, remote %s, last frame from remote %lums ago\n",
-                  WiFi.channel(), haveRemote ? "paired" : "none",
+    uint8_t ch = 0;
+    wifi_second_chan_t second = WIFI_SECOND_CHAN_NONE;
+    esp_wifi_get_channel(&ch, &second);
+    Serial.printf("radio channel %d (want %u), remote %s, last frame from remote %lums ago",
+                  ch, (unsigned)ESPNOW_CHANNEL,
+                  haveRemote ? "paired" : "none",
                   (unsigned long)(millis() - lastRemoteFrame));
+    if (IR_RX_ENABLED) {
+      Serial.printf(", ir interrupts %lu, ir pulses %lu, ir glitches %lu, ir level %s",
+                    (unsigned long)irrx::interruptCount(),
+                    (unsigned long)irrx::pulseCount(),
+                    (unsigned long)irrx::glitchCount(),
+                    irrx::currentLevel() ? "HIGH" : "LOW");
+    }
+    Serial.printf("\n");
   }
   delay(5);
 }
