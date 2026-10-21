@@ -33,44 +33,29 @@ struct Frame {
   bool inverted = false; // the levels had to be flipped to find the header
 };
 
-// Find the header and decode the bits that follow. Bits are LSB first within
-// each byte, matching the Midea RG57 capture.
-//
-// Some receiver modules output the complement of the usual mark/space levels.
-// If no header is found the whole burst is tried the other way round.
-inline Frame decode(const Edge* edges, int count) {
+// Decode one burst with a known polarity. Inverted means the levels are
+// flipped, which is what a receiver that idles low produces.
+inline Frame decodePolarity(const Edge* edges, int count, bool inverted) {
   Frame f;
-  bool flip = false;
-
-  for (int attempt = 0; attempt < 2; attempt++) {
-    auto levelOf = [&](int i) -> uint8_t {
-      const uint8_t l = edges[i].level;
-      return flip ? static_cast<uint8_t>(!l) : l;
-    };
-
-    f = Frame();
-    f.inverted = flip;
-
-    for (int i = 0; i + 1 < count; i++) {
-      if (levelOf(i) == 1 && edges[i].us >= HEADER_MIN_US &&
-          edges[i].us <= HEADER_MAX_US && levelOf(i + 1) == 0 &&
-          edges[i + 1].us >= HEADER_MIN_US && edges[i + 1].us <= HEADER_MAX_US) {
-        f.headerFound = true;
-        f.headerIndex = i;
-        f.headerMarkUs = edges[i].us;
-        f.headerSpaceUs = edges[i + 1].us;
-        break;
-      }
-    }
-    if (f.headerFound) break;
-    flip = true;
-  }
-  if (!f.headerFound) return f;
+  f.inverted = inverted;
 
   auto levelOf = [&](int i) -> uint8_t {
     const uint8_t l = edges[i].level;
-    return f.inverted ? static_cast<uint8_t>(!l) : l;
+    return inverted ? static_cast<uint8_t>(!l) : l;
   };
+
+  for (int i = 0; i + 1 < count; i++) {
+    if (levelOf(i) == 1 && edges[i].us >= HEADER_MIN_US &&
+        edges[i].us <= HEADER_MAX_US && levelOf(i + 1) == 0 &&
+        edges[i + 1].us >= HEADER_MIN_US && edges[i + 1].us <= HEADER_MAX_US) {
+      f.headerFound = true;
+      f.headerIndex = i;
+      f.headerMarkUs = edges[i].us;
+      f.headerSpaceUs = edges[i + 1].us;
+      break;
+    }
+  }
+  if (!f.headerFound) return f;
 
   int i = f.headerIndex + 2;
   while (i + 1 < count && f.bitCount < MAX_BITS) {
@@ -95,6 +80,31 @@ inline Frame decode(const Edge* edges, int count) {
     }
   }
   return f;
+}
+
+// Find the header and decode the bits that follow. Bits are LSB first within
+// each byte, matching the Midea RG57 capture.
+//
+// Some receiver modules output the complement of the usual mark/space levels.
+// Both polarities are tried and the one that decodes the most bits wins. That
+// matters: a remote whose marks are the low levels has a long space right
+// before the second header, and a search for the header in the wrong
+// polarity finds that pair first and decodes nothing.
+inline Frame decode(const Edge* edges, int count) {
+  Frame best;
+  bool haveBest = false;
+  for (int attempt = 0; attempt < 2; attempt++) {
+    const Frame frame = decodePolarity(edges, count, attempt == 1);
+    // A complete frame beats everything else. Otherwise the one with the
+    // most bits wins, and a tie goes to the usual polarity.
+    const bool better = !haveBest || (frame.full && !best.full) ||
+                        (frame.full == best.full && frame.bitCount > best.bitCount);
+    if (better) {
+      best = frame;
+      haveBest = true;
+    }
+  }
+  return best;
 }
 
 }  // namespace irrx

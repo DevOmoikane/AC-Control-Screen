@@ -95,14 +95,15 @@ bool transmitPacket(const uint8_t bytes[6]) {
   if (!irReady) return false;
   rmt_item32_t items[IR_ITEMS]{};
   size_t index = 0;
-  makePulse(items[index++], 4350, 4400);
+  makePulse(items[index++], midea::HEADER_MARK_US, midea::HEADER_SPACE_US);
   for (size_t byte = 0; byte < 6; ++byte) {
     for (int bit = 0; bit < 8; ++bit) {
       const bool one = (bytes[byte] >> bit) & 1;
-      makePulse(items[index++], 560, one ? 1690 : 560);
+      makePulse(items[index++], midea::MARK_US,
+                one ? midea::SPACE_ONE_US : midea::SPACE_ZERO_US);
     }
   }
-  makePulse(items[index++], 560, 5200);
+  makePulse(items[index++], midea::MARK_US, midea::FRAME_GAP_US);
   if (index != IR_ITEMS) return false;
 
   // Each logical packet is transmitted twice, as observed from the handset.
@@ -241,10 +242,11 @@ void loop() {
                   haveRemote ? "paired" : "none",
                   (unsigned long)(millis() - lastRemoteFrame));
     if (IR_RX_ENABLED) {
-      Serial.printf(", ir interrupts %lu, ir pulses %lu, ir glitches %lu, ir level %s",
+      Serial.printf(", ir interrupts %lu, ir pulses %lu, ir glitches %lu, ir dropped %lu, ir level %s",
                     (unsigned long)irrx::interruptCount(),
                     (unsigned long)irrx::pulseCount(),
                     (unsigned long)irrx::glitchCount(),
+                    (unsigned long)irrx::droppedCount(),
                     irrx::currentLevel() ? "HIGH" : "LOW");
     }
     Serial.printf("\n");

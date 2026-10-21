@@ -1,0 +1,200 @@
+13:48:19 radio channel 5 (want 5), remote none, last frame from remote 25022ms ago, ir interrupts 0, ir pulses 0, ir glitches 0, ir level LOW
+13:48:24 radio channel 5 (want 5), remote none, last frame from remote 30027ms ago, ir interrupts 0, ir pulses 0, ir glitches 0, ir level LOW
+13:48:29 radio channel 5 (want 5), remote none, last frame from remote 35032ms ago, ir interrupts 0, ir pulses 0, ir glitches 0, ir level LOW
+13:48:34 radio channel 5 (want 5), remote none, last frame from remote 40037ms ago, ir interrupts 0, ir pulses 0, ir glitches 0, ir level LOW
+13:48:39 radio channel 5 (want 5), remote none, last frame from remote 45042ms ago, ir interrupts 0, ir pulses 0, ir glitches 0, ir level LOW
+13:48:44 radio channel 5 (want 5), remote none, last frame from remote 50047ms ago, ir interrupts 0, ir pulses 0, ir glitches 0, ir level LOW
+13:48:49 radio channel 5 (want 5), remote none, last frame from remote 55052ms ago, ir interrupts 0, ir pulses 0, ir glitches 0, ir level LOW
+13:48:54 radio channel 5 (want 5), remote none, last frame from remote 60057ms ago, ir interrupts 0, ir pulses 0, ir glitches 0, ir level LOW
+13:48:56 [ir rx] capture 1: 200 edges
+13:48:56 [ir rx] decode: header 5305/4344 us, 0 bits
+13:48:56 [ir rx] raw (level:width us):
+13:48:56 [ir rx]  H:61079905  L:4339   H:4494   L:449    H:1731   L:451    H:629    L:448  
+13:48:56 [ir rx]  H:1731   L:452    H:1731   L:451    H:628    L:449    H:629    L:450  
+13:48:56 [ir rx]  H:1731   L:450    H:631    L:448    H:628    L:449    H:1732   L:450  
+13:48:56 [ir rx]  H:628    L:450    H:629    L:449    H:1731   L:451    H:1732   L:450  
+13:48:56 [ir rx]  H:629    L:449    H:1731   L:451    H:1731   L:451    H:628    L:450  
+13:48:56 [ir rx]  H:1731   L:450    H:1732   L:450    H:1732   L:452    H:1730   L:451  
+13:48:56 [ir rx]  H:1731   L:451    H:1731   L:452    H:629    L:448    H:1731   L:451  
+13:48:56 [ir rx]  H:628    L:450    H:629    L:448    H:629    L:450    H:628    L:450  
+13:48:56 [ir rx]  H:628    L:450    H:628    L:449    H:629    L:450    H:627    L:450  
+13:48:56 [ir rx]  H:1731   L:451    H:629    L:449    H:629    L:449    H:629    L:449  
+13:48:56 [ir rx]  H:628    L:450    H:628    L:450    H:1731   L:451    H:1731   L:451  
+13:48:56 [ir rx]  H:628    L:449    H:1732   L:451    H:1731   L:451    H:1731   L:452  
+13:48:56 [ir rx]  H:1730   L:452    H:1730   L:452    H:5305   L:4344   H:4490   L:453  
+13:48:56 [ir rx]  H:1728   L:456    H:647    L:455    H:1701   L:482    H:1700   L:505  
+13:48:56 [ir rx]  H:599    L:478    H:600    L:478    H:1678   L:502    H:602    L:473  
+13:48:56 [ir rx]  H:605    L:445    H:1712   L:469    H:634    L:418    H:659    L:400  
+13:48:56 [ir rx]  H:1757   L:425    H:1758   L:424    H:678    L:400    H:1757   L:425  
+13:48:56 [ir rx]  H:1758   L:425    H:677    L:401    H:1755   L:428    H:1753   L:428  
+13:48:56 [ir rx]  H:1755   L:426    H:1756   L:427    H:1761   L:422    H:1754   L:430  
+13:48:56 [ir rx]  H:672    L:430    H:1728   L:454    H:648    L:458    H:620    L:458  
+13:48:56 [ir rx]  H:619    L:456    H:623    L:456    H:622    L:455    H:623    L:428  
+13:48:56 [ir rx]  H:650    L:428    H:649    L:427    H:1731   L:449    H:652    L:426  
+13:48:56 [ir rx]  H:632    L:444    H:635    L:443    H:634    L:444    H:652    L:427  
+13:48:56 [ir rx]  H:1735   L:446    H:1736   L:446    H:652    L:426    H:1755   L:426  
+13:48:56 [ir rx]  H:1757   L:424    H:1758   L:425    H:1757   L:424    H:1758   L:424  
+13:48:56 [ir rx] pulse width histogram (level:width us x count):
+13:48:56 [ir rx]   L:400    x 3
+13:48:56 [ir rx]   L:410    x 1
+13:48:56 [ir rx]   L:420    x 20
+13:48:56 [ir rx]   L:430    x 2
+13:48:56 [ir rx]   L:440    x 21
+13:48:56 [ir rx]   L:450    x 44
+13:48:56 [ir rx]   L:460    x 1
+13:48:56 [ir rx]   L:470    x 3
+13:48:56 [ir rx]   L:480    x 1
+13:48:56 [ir rx]   L:500    x 2
+13:48:56 [ir rx]   H:590    x 1
+13:48:56 [ir rx]   H:600    x 3
+13:48:56 [ir rx]   H:610    x 1
+13:48:56 [ir rx]   H:620    x 27
+13:48:56 [ir rx]   H:630    x 5
+13:48:56 [ir rx]   H:640    x 3
+13:48:56 [ir rx]   H:650    x 5
+13:48:56 [ir rx]   H:670    x 3
+13:48:56 [ir rx]   H:1670   x 1
+13:48:56 [ir rx]   H:1700   x 2
+13:48:56 [ir rx]   H:1710   x 1
+13:48:56 [ir rx]   H:1720   x 2
+13:48:56 [ir rx]   H:1730   x 27
+13:48:56 [ir rx]   H:1750   x 14
+13:48:56 [ir rx]   H:1760   x 1
+13:48:56 [ir rx]   L:4330   x 1
+13:48:56 [ir rx]   L:4340   x 1
+13:48:56 [ir rx]   H:4490   x 2
+13:48:56 [ir rx]   H:5300   x 1
+13:48:56 [ir rx]   H:61079900 x 1
+13:48:56 [ir rx] long pulses (>= 1500 us): H:61079905 L:4339 H:4494 H:1731 H:1731 H:1731 H:1731 H:1732 H:1731 H:1732 H:1731 H:1731 H:1731 H:1732 H:1732 H:1730 H:1731 H:1731 H:1731 H:1731 H:1731 H:1731 H:1732 H:1731 H:1731 H:1730 H:1730 H:5305 L:4344 H:4490 H:1728 H:1701 H:1700 H:1678 H:1712 H:1757 H:1758 H:1757 H:1758 H:1755 H:1753 H:1755 H:1756 H:1761 H:1754 H:1728 H:1731 H:1735 H:1736 H:1755 H:1757 H:1758 H:1757 H:1758
+13:48:56 [ir rx] 200 edges, 30 distinct widths, 54 long pulses
+13:48:56 [ir rx] capture 2: 200 edges
+13:48:56 [ir rx] decode: header 5340/4309 us, 0 bits
+13:48:56 [ir rx] raw (level:width us):
+13:48:56 [ir rx]  H:59466  L:4315   H:4519   L:425    H:1758   L:423    H:653    L:425  
+13:48:56 [ir rx]  H:1758   L:425    H:1757   L:425    H:1758   L:424    H:654    L:423  
+13:48:56 [ir rx]  H:1759   L:423    H:1759   L:423    H:655    L:423    H:1759   L:423  
+13:48:56 [ir rx]  H:655    L:423    H:656    L:422    H:655    L:423    H:1759   L:423  
+13:48:56 [ir rx]  H:655    L:422    H:656    L:423    H:655    L:423    H:655    L:422  
+13:48:56 [ir rx]  H:657    L:422    H:655    L:423    H:655    L:423    H:656    L:421  
+13:48:56 [ir rx]  H:656    L:422    H:1761   L:421    H:1762   L:420    H:1761   L:421  
+13:48:56 [ir rx]  H:1761   L:422    H:1760   L:421    H:1761   L:422    H:1760   L:421  
+13:48:56 [ir rx]  H:1762   L:420    H:658    L:421    H:657    L:421    H:657    L:420  
+13:48:56 [ir rx]  H:658    L:420    H:658    L:420    H:657    L:421    H:658    L:419  
+13:48:56 [ir rx]  H:659    L:420    H:658    L:419    H:1763   L:419    H:1763   L:419  
+13:48:56 [ir rx]  H:1763   L:419    H:1764   L:419    H:1763   L:419    H:1764   L:418  
+13:48:56 [ir rx]  H:1764   L:418    H:1764   L:418    H:5340   L:4309   H:4525   L:418  
+13:48:56 [ir rx]  H:1765   L:416    H:662    L:416    H:1766   L:416    H:1766   L:416  
+13:48:56 [ir rx]  H:1766   L:417    H:661    L:417    H:1766   L:416    H:1766   L:416  
+13:48:56 [ir rx]  H:662    L:416    H:662    L:415    H:663    L:414    H:664    L:414  
+13:48:56 [ir rx]  H:664    L:413    H:665    L:413    H:665    L:412    H:666    L:412  
+13:48:56 [ir rx]  H:666    L:412    H:1771   L:411    H:667    L:411    H:667    L:411  
+13:48:56 [ir rx]  H:667    L:411    H:668    L:410    H:668    L:409    H:1796   L:387  
+13:48:56 [ir rx]  H:691    L:387    H:691    L:387    H:691    L:387    H:691    L:387  
+13:48:56 [ir rx]  H:691    L:387    H:692    L:386    H:691    L:387    H:691    L:387  
+13:48:56 [ir rx]  H:691    L:387    H:691    L:387    H:691    L:386    H:693    L:386  
+13:48:56 [ir rx]  H:692    L:386    H:691    L:387    H:691    L:386    H:692    L:387  
+13:48:56 [ir rx]  H:1796   L:386    H:1796   L:386    H:1796   L:386    H:1797   L:386  
+13:48:56 [ir rx]  H:1796   L:387    H:1796   L:386    H:694    L:383    H:693    L:386  
+13:48:56 [ir rx] pulse width histogram (level:width us x count):
+13:48:56 [ir rx]   L:380    x 25
+13:48:56 [ir rx]   L:400    x 1
+13:48:56 [ir rx]   L:410    x 33
+13:48:56 [ir rx]   L:420    x 39
+13:48:56 [ir rx]   H:650    x 24
+13:48:56 [ir rx]   H:660    x 16
+13:48:56 [ir rx]   H:690    x 18
+13:48:56 [ir rx]   H:1750   x 8
+13:48:56 [ir rx]   H:1760   x 22
+13:48:56 [ir rx]   H:1770   x 1
+13:48:56 [ir rx]   H:1790   x 7
+13:48:56 [ir rx]   L:4300   x 1
+13:48:56 [ir rx]   L:4310   x 1
+13:48:56 [ir rx]   H:4510   x 1
+13:48:56 [ir rx]   H:4520   x 1
+13:48:56 [ir rx]   H:5340   x 1
+13:48:56 [ir rx]   H:59460  x 1
+13:48:56 [ir rx] long pulses (>= 1500 us): H:59466 L:4315 H:4519 H:1758 H:1758 H:1757 H:1758 H:1759 H:1759 H:1759 H:1759 H:1761 H:1762 H:1761 H:1761 H:1760 H:1761 H:1760 H:1762 H:1763 H:1763 H:1763 H:1764 H:1763 H:1764 H:1764 H:1764 H:5340 L:4309 H:4525 H:1765 H:1766 H:1766 H:1766 H:1766 H:1766 H:1771 H:1796 H:1796 H:1796 H:1796 H:1797 H:1796 H:1796
+13:48:56 [ir rx] 200 edges, 17 distinct widths, 44 long pulses
+13:48:59 radio channel 5 (want 5), remote none, last frame from remote 65060ms ago, ir interrupts 400, ir pulses 400, ir glitches 0, ir level HIGH
+13:49:04 radio channel 5 (want 5), remote none, last frame from remote 70065ms ago, ir interrupts 400, ir pulses 400, ir glitches 0, ir level HIGH
+13:49:09 radio channel 5 (want 5), remote none, last frame from remote 75070ms ago, ir interrupts 400, ir pulses 400, ir glitches 0, ir level HIGH
+13:49:09 [ir rx] capture 3: 112 edges
+13:49:09 [ir rx] decode: header 5240/4409 us, 0 bits
+13:49:09 [ir rx] raw (level:width us):
+13:49:09 [ir rx]  H:13503199  L:4342   H:4490   L:452    H:1729   L:455    H:649    L:428  
+13:49:09 [ir rx]  H:1728   L:453    H:1730   L:453    H:630    L:448    H:629    L:449  
+13:49:09 [ir rx]  H:1729   L:453    H:651    L:427    H:630    L:447    H:1730   L:452  
+13:49:09 [ir rx]  H:629    L:449    H:628    L:449    H:1731   L:452    H:1730   L:452  
+13:49:09 [ir rx]  H:628    L:449    H:1731   L:451    H:1732   L:451    H:629    L:449  
+13:49:09 [ir rx]  H:1731   L:450    H:1732   L:450    H:1733   L:450    H:1732   L:450  
+13:49:09 [ir rx]  H:1733   L:449    H:1732   L:451    H:631    L:446    H:1733   L:450  
+13:49:09 [ir rx]  H:633    L:444    H:655    L:422    H:636    L:439    H:659    L:418  
+13:49:09 [ir rx]  H:660    L:401    H:676    L:403    H:676    L:402    H:1755   L:429  
+13:49:09 [ir rx]  H:1753   L:430    H:674    L:406    H:673    L:429    H:649    L:432  
+13:49:09 [ir rx]  H:646    L:458    H:620    L:460    H:1697   L:513    H:590    L:489  
+13:49:09 [ir rx]  H:589    L:491    H:1666   L:516    H:1666   L:516    H:1666   L:517  
+13:49:09 [ir rx]  H:1666   L:516    H:1665   L:517    H:5240   L:4409   H:4426   L:516  
+13:49:09 [ir rx]  H:1666   L:516    H:586    L:492    H:1666   L:514    H:1668   L:514  
+13:49:09 [ir rx] pulse width histogram (level:width us x count):
+13:49:09 [ir rx]   L:400    x 4
+13:49:09 [ir rx]   L:410    x 1
+13:49:09 [ir rx]   L:420    x 5
+13:49:09 [ir rx]   L:430    x 3
+13:49:09 [ir rx]   L:440    x 10
+13:49:09 [ir rx]   L:450    x 17
+13:49:09 [ir rx]   L:460    x 1
+13:49:09 [ir rx]   L:480    x 1
+13:49:09 [ir rx]   L:490    x 2
+13:49:09 [ir rx]   L:510    x 10
+13:49:09 [ir rx]   H:580    x 2
+13:49:09 [ir rx]   H:590    x 1
+13:49:09 [ir rx]   H:620    x 6
+13:49:09 [ir rx]   H:630    x 5
+13:49:09 [ir rx]   H:640    x 3
+13:49:09 [ir rx]   H:650    x 3
+13:49:09 [ir rx]   H:660    x 1
+13:49:09 [ir rx]   H:670    x 4
+13:49:09 [ir rx]   H:1660   x 8
+13:49:09 [ir rx]   H:1690   x 1
+13:49:09 [ir rx]   H:1720   x 3
+13:49:09 [ir rx]   H:1730   x 13
+13:49:09 [ir rx]   H:1750   x 2
+13:49:09 [ir rx]   L:4340   x 1
+13:49:09 [ir rx]   L:4400   x 1
+13:49:09 [ir rx]   H:4420   x 1
+13:49:09 [ir rx]   H:4490   x 1
+13:49:09 [ir rx]   H:5240   x 1
+13:49:09 [ir rx]   H:13503190 x 1
+13:49:09 [ir rx] long pulses (>= 1500 us): H:13503199 L:4342 H:4490 H:1729 H:1728 H:1730 H:1729 H:1730 H:1731 H:1730 H:1731 H:1732 H:1731 H:1732 H:1733 H:1732 H:1733 H:1732 H:1733 H:1755 H:1753 H:1697 H:1666 H:1666 H:1666 H:1666 H:1665 H:5240 L:4409 H:4426 H:1666 H:1666 H:1668
+13:49:09 [ir rx] 112 edges, 29 distinct widths, 33 long pulses
+13:49:14 radio channel 5 (want 5), remote none, last frame from remote 80074ms ago, ir interrupts 800, ir pulses 512, ir glitches 288, ir level HIGH
+13:49:19 radio channel 5 (want 5), remote none, last frame from remote 85079ms ago, ir interrupts 800, ir pulses 512, ir glitches 288, ir level HIGH
+13:49:24 radio channel 5 (want 5), remote none, last frame from remote 90084ms ago, ir interrupts 800, ir pulses 512, ir glitches 288, ir level HIGH
+13:49:29 radio channel 5 (want 5), remote none, last frame from remote 95089ms ago, ir interrupts 1200, ir pulses 512, ir glitches 688, ir level HIGH
+13:49:34 radio channel 5 (want 5), remote none, last frame from remote 100094ms ago, ir interrupts 1200, ir pulses 512, ir glitches 688, ir level HIGH
+13:49:39 radio channel 5 (want 5), remote none, last frame from remote 105099ms ago, ir interrupts 1200, ir pulses 512, ir glitches 688, ir level HIGH
+13:49:44 radio channel 5 (want 5), remote none, last frame from remote 110104ms ago, ir interrupts 1600, ir pulses 512, ir glitches 1088, ir level HIGH
+13:49:49 radio channel 5 (want 5), remote none, last frame from remote 115109ms ago, ir interrupts 1600, ir pulses 512, ir glitches 1088, ir level HIGH
+13:49:54 radio channel 5 (want 5), remote none, last frame from remote 120114ms ago, ir interrupts 1600, ir pulses 512, ir glitches 1088, ir level HIGH
+13:49:59 radio channel 5 (want 5), remote none, last frame from remote 125119ms ago, ir interrupts 1600, ir pulses 512, ir glitches 1088, ir level HIGH
+13:50:04 radio channel 5 (want 5), remote none, last frame from remote 130120ms ago, ir interrupts 1600, ir pulses 512, ir glitches 1088, ir level HIGH
+13:50:09 radio channel 5 (want 5), remote none, last frame from remote 135124ms ago, ir interrupts 1600, ir pulses 512, ir glitches 1088, ir level HIGH
+13:50:14 radio channel 5 (want 5), remote none, last frame from remote 140129ms ago, ir interrupts 1600, ir pulses 512, ir glitches 1088, ir level HIGH
+13:50:19 radio channel 5 (want 5), remote none, last frame from remote 145134ms ago, ir interrupts 1600, ir pulses 512, ir glitches 1088, ir level HIGH
+13:50:24 radio channel 5 (want 5), remote none, last frame from remote 150139ms ago, ir interrupts 1600, ir pulses 512, ir glitches 1088, ir level HIGH
+13:50:29 radio channel 5 (want 5), remote none, last frame from remote 155144ms ago, ir interrupts 1600, ir pulses 512, ir glitches 1088, ir level HIGH
+13:50:34 radio channel 5 (want 5), remote none, last frame from remote 160149ms ago, ir interrupts 1600, ir pulses 512, ir glitches 1088, ir level HIGH
+13:50:39 radio channel 5 (want 5), remote none, last frame from remote 165154ms ago, ir interrupts 1600, ir pulses 512, ir glitches 1088, ir level HIGH
+13:50:44 radio channel 5 (want 5), remote none, last frame from remote 170159ms ago, ir interrupts 1600, ir pulses 512, ir glitches 1088, ir level HIGH
+13:50:49 radio channel 5 (want 5), remote none, last frame from remote 175164ms ago, ir interrupts 1600, ir pulses 512, ir glitches 1088, ir level HIGH
+13:50:54 radio channel 5 (want 5), remote none, last frame from remote 180169ms ago, ir interrupts 2000, ir pulses 512, ir glitches 1488, ir level HIGH
+13:50:59 radio channel 5 (want 5), remote none, last frame from remote 185174ms ago, ir interrupts 2000, ir pulses 512, ir glitches 1488, ir level HIGH
+13:51:04 radio channel 5 (want 5), remote none, last frame from remote 190179ms ago, ir interrupts 2000, ir pulses 512, ir glitches 1488, ir level HIGH
+13:51:09 radio channel 5 (want 5), remote none, last frame from remote 195184ms ago, ir interrupts 2400, ir pulses 512, ir glitches 1888, ir level HIGH
+13:51:14 radio channel 5 (want 5), remote none, last frame from remote 200189ms ago, ir interrupts 2400, ir pulses 512, ir glitches 1888, ir level HIGH
+13:51:19 radio channel 5 (want 5), remote none, last frame from remote 205194ms ago, ir interrupts 2400, ir pulses 512, ir glitches 1888, ir level HIGH
+13:51:24 radio channel 5 (want 5), remote none, last frame from remote 210199ms ago, ir interrupts 2400, ir pulses 512, ir glitches 1888, ir level HIGH
+13:51:29 radio channel 5 (want 5), remote none, last frame from remote 215204ms ago, ir interrupts 2800, ir pulses 512, ir glitches 2288, ir level HIGH
+13:51:34 radio channel 5 (want 5), remote none, last frame from remote 220209ms ago, ir interrupts 2800, ir pulses 512, ir glitches 2288, ir level HIGH
+13:51:39 radio channel 5 (want 5), remote none, last frame from remote 225214ms ago, ir interrupts 2800, ir pulses 512, ir glitches 2288, ir level HIGH
+13:51:44 radio channel 5 (want 5), remote none, last frame from remote 230219ms ago, ir interrupts 2800, ir pulses 512, ir glitches 2288, ir level HIGH

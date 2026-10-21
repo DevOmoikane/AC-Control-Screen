@@ -5,6 +5,23 @@
 // Captured RG57A7/BGEF byte order: 4D B2 ... , 48-bit, LSB-first.
 // IMPORTANT: this is NOT the generic Midea library's byte representation.
 namespace midea {
+
+// Pulse timings of the original remote, measured from the frames it sends.
+//
+// The receiver module idles high and pulls the line low while the carrier
+// is on, so the marks are the low levels. A frame is a header, 48 bits and
+// a trailing mark; the remote sends the whole thing twice.
+//
+//   header mark, header space, then per bit: mark, space (long for a one)
+//   then a trailing mark and the gap to the next copy
+constexpr uint32_t HEADER_MARK_US = 4345;
+constexpr uint32_t HEADER_SPACE_US = 4490;
+constexpr uint32_t MARK_US = 450;
+constexpr uint32_t SPACE_ZERO_US = 630;
+constexpr uint32_t SPACE_ONE_US = 1725;
+// The gap between the two copies of a frame.
+constexpr uint32_t FRAME_GAP_US = 5300;
+
 constexpr uint8_t OFF_PACKET[6] = {0x4D, 0xB2, 0xDE, 0x21, 0x07, 0xF8};
 constexpr uint8_t TEMP_NIBBLE[14] = {
     0x0, 0x8, 0xC, 0x4, 0x6, 0xE, 0xA,

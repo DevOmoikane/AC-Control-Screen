@@ -7,6 +7,7 @@
 #include <cstdio>
 
 #include "AcConfig.h"
+#include "IrDecode.h"
 #include "IrReceiver.h"
 
 namespace irrx {
@@ -19,8 +20,7 @@ constexpr uint32_t LONG_PULSE_US = 1500;
 
 constexpr int MAX_EDGES = 512;
 
-volatile Edge g_edges[MAX_EDGES];
-volatile uint32_t g_edgeCount = 0;  // total edges ever seen
+EdgeRing g_ring;
 volatile uint32_t g_lastEdgeUs = 0;
 volatile uint8_t g_lastLevel = 0;
 volatile bool g_started = false;
@@ -49,10 +49,8 @@ void isr(void* arg) {
     // Too short to be a real pulse: ignore it and keep the previous edge as
     // the timing reference, so the noise is absorbed into the next pulse
     // instead of shortening it.
-    if (dt >= MIN_PULSE_US && g_edgeCount < MAX_EDGES) {
-      g_edges[g_edgeCount].level = g_lastLevel;
-      g_edges[g_edgeCount].us = dt;
-      g_edgeCount++;
+    if (dt >= MIN_PULSE_US) {
+      g_ring.write(g_lastLevel, dt);
       g_edgeTotal++;
     } else {
       g_glitchCount++;
@@ -118,10 +116,33 @@ void summariseBurst() {
                 g_burstCount, bucketCount, longs);
 }
 
+// Decode the burst with the Midea decoder, so the log shows the frame as
+// bytes and not only as raw pulse widths. The decoder assumes the Midea
+// layout and says so when the burst does not look like one.
+void printDecoded() {
+  const Frame frame = decode(g_burst, g_burstCount);
+  if (!frame.headerFound) {
+    Serial.printf("[ir rx] decode: no Midea header in this burst\n");
+    return;
+  }
+  Serial.printf("[ir rx] decode: header %lu/%lu us, %d bits%s",
+                (unsigned long)frame.headerMarkUs,
+                (unsigned long)frame.headerSpaceUs,
+                frame.bitCount, frame.inverted ? ", inverted" : "");
+  if (frame.full) {
+    Serial.printf(", bytes");
+    for (int i = 0; i < FRAME_BYTES; i++) Serial.printf(" %02X", frame.bytes[i]);
+  }
+  Serial.printf("\n");
+}
+
 // Print the raw timings of one burst. No protocol is assumed: the raw trace
 // plus the width histogram is what identifies an unknown encoding.
 void analyseBurst() {
-  Serial.printf("[ir rx] burst of %d edges\n", g_burstCount);
+  g_frames++;
+  Serial.printf("[ir rx] capture %lu: %d edges\n", (unsigned long)g_frames,
+                g_burstCount);
+  printDecoded();
   Serial.printf("[ir rx] raw (level:width us):\n");
   for (int i = 0; i < g_burstCount; i++) {
     if ((i & 7) == 0) Serial.printf("[ir rx]  ");
@@ -129,7 +150,6 @@ void analyseBurst() {
     Serial.printf(((i & 7) == 7 || i == g_burstCount - 1) ? "\n" : "  ");
   }
   summariseBurst();
-  g_frames++;
 }
 
 }  // namespace
@@ -179,14 +199,8 @@ bool begin(int gpio) {
 void poll() {
   if (!g_started) return;
 
-  static uint32_t consumed = 0;
-  const uint32_t total = g_edgeCount;
-  while (consumed < total) {
-    Edge e;
-    e.level = g_edges[consumed % MAX_EDGES].level;
-    e.us = g_edges[consumed % MAX_EDGES].us;
-    consumed++;
-
+  Edge e;
+  while (g_ring.read(e)) {
     // A long silence ends the burst.
     if (g_burstCount > 0 && g_lastEdgeUs - g_burstLastUs > BURST_GAP_US) {
       analyseBurst();
@@ -214,6 +228,8 @@ uint32_t frameCount() { return g_frames; }
 uint32_t interruptCount() { return g_isrCount; }
 uint32_t pulseCount() { return g_edgeTotal; }
 uint32_t glitchCount() { return g_glitchCount; }
+// Pulses that were lost because the reader did not keep up.
+uint32_t droppedCount() { return g_ring.dropped(); }
 uint8_t currentLevel() { return g_lastSeenLevel; }
 
 }  // namespace irrx
