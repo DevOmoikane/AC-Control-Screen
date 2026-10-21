@@ -1,0 +1,675 @@
+14:59:56 radio channel 5 (want 5), remote none, last frame from remote 40038ms ago, ir interrupts 0, ir pulses 0, ir glitches 0, ir dropped 0, ir level LOW
+15:00:01 radio channel 5 (want 5), remote none, last frame from remote 45043ms ago, ir interrupts 0, ir pulses 0, ir glitches 0, ir dropped 0, ir level LOW
+15:00:06 radio channel 5 (want 5), remote none, last frame from remote 50048ms ago, ir interrupts 0, ir pulses 0, ir glitches 0, ir dropped 0, ir level LOW
+15:00:11 radio channel 5 (want 5), remote none, last frame from remote 55053ms ago, ir interrupts 0, ir pulses 0, ir glitches 0, ir dropped 0, ir level LOW
+15:00:16 radio channel 5 (want 5), remote none, last frame from remote 60058ms ago, ir interrupts 0, ir pulses 0, ir glitches 0, ir dropped 0, ir level LOW
+15:00:21 radio channel 5 (want 5), remote none, last frame from remote 65063ms ago, ir interrupts 0, ir pulses 0, ir glitches 0, ir dropped 0, ir level LOW
+15:00:26 radio channel 5 (want 5), remote none, last frame from remote 70068ms ago, ir interrupts 0, ir pulses 0, ir glitches 0, ir dropped 0, ir level LOW
+15:00:29 [ir rx] capture 1: 200 edges
+15:00:29 [ir rx] decode: header 4341/4494 us, 48 bits, inverted, bytes 4D B2 FD 02 00 FF
+15:00:29 [ir rx] raw (level:width us):
+15:00:29 [ir rx]  H:72340613  L:4341   H:4494   L:450    H:1730   L:452    H:652    L:426  
+15:00:29 [ir rx]  H:1730   L:451    H:1732   L:452    H:651    L:427    H:651    L:427  
+15:00:29 [ir rx]  H:1730   L:451    H:653    L:426    H:652    L:426    H:1730   L:452  
+15:00:29 [ir rx]  H:651    L:428    H:650    L:426    H:1732   L:452    H:1730   L:452  
+15:00:29 [ir rx]  H:651    L:426    H:1735   L:448    H:1731   L:453    H:650    L:427  
+15:00:29 [ir rx]  H:1730   L:452    H:1731   L:451    H:1731   L:451    H:1731   L:452  
+15:00:29 [ir rx]  H:1730   L:453    H:1729   L:452    H:653    L:426    H:1730   L:453  
+15:00:29 [ir rx]  H:651    L:426    H:652    L:426    H:653    L:424    H:653    L:425  
+15:00:29 [ir rx]  H:653    L:425    H:653    L:426    H:653    L:425    H:653    L:425  
+15:00:29 [ir rx]  H:653    L:425    H:654    L:423    H:654    L:424    H:654    L:426  
+15:00:29 [ir rx]  H:653    L:424    H:654    L:424    H:1732   L:450    H:1732   L:451  
+15:00:29 [ir rx]  H:1732   L:450    H:1733   L:449    H:1732   L:451    H:1732   L:450  
+15:00:29 [ir rx]  H:1732   L:451    H:1732   L:450    H:5309   L:4341   H:4493   L:450  
+15:00:29 [ir rx]  H:1732   L:450    H:655    L:423    H:1733   L:449    H:1733   L:449  
+15:00:29 [ir rx]  H:655    L:424    H:631    L:446    H:1733   L:450    H:630    L:447  
+15:00:29 [ir rx]  H:632    L:446    H:1733   L:451    H:633    L:443    H:632    L:446  
+15:00:29 [ir rx]  H:1733   L:450    H:1732   L:450    H:631    L:447    H:1732   L:450  
+15:00:29 [ir rx]  H:1733   L:449    H:632    L:445    H:1734   L:450    H:1732   L:449  
+15:00:29 [ir rx]  H:1733   L:449    H:1734   L:448    H:1734   L:447    H:1735   L:427  
+15:00:29 [ir rx]  H:655    L:423    H:1755   L:428    H:676    L:401    H:678    L:399  
+15:00:29 [ir rx]  H:678    L:401    H:677    L:400    H:678    L:402    H:675    L:402  
+15:00:29 [ir rx]  H:676    L:405    H:674    L:404    H:674    L:406    H:672    L:429  
+15:00:29 [ir rx]  H:649    L:432    H:647    L:458    H:619    L:463    H:616    L:487  
+15:00:29 [ir rx]  H:1670   L:516    H:1667   L:515    H:1667   L:516    H:1666   L:516  
+15:00:29 [ir rx]  H:1666   L:517    H:1665   L:517    H:1665   L:518    H:1664   L:517  
+15:00:29 [ir rx] pulse width histogram (level:width us x count):
+15:00:29 [ir rx]   L:390    x 1
+15:00:29 [ir rx]   L:400    x 8
+15:00:29 [ir rx]   L:420    x 30
+15:00:29 [ir rx]   L:430    x 1
+15:00:29 [ir rx]   L:440    x 16
+15:00:29 [ir rx]   L:450    x 32
+15:00:29 [ir rx]   L:460    x 1
+15:00:29 [ir rx]   L:480    x 1
+15:00:29 [ir rx]   L:510    x 8
+15:00:29 [ir rx]   H:610    x 2
+15:00:29 [ir rx]   H:630    x 7
+15:00:29 [ir rx]   H:640    x 2
+15:00:29 [ir rx]   H:650    x 27
+15:00:29 [ir rx]   H:670    x 10
+15:00:29 [ir rx]   H:1660   x 7
+15:00:29 [ir rx]   H:1670   x 1
+15:00:29 [ir rx]   H:1720   x 1
+15:00:29 [ir rx]   H:1730   x 38
+15:00:29 [ir rx]   H:1750   x 1
+15:00:29 [ir rx]   L:4340   x 2
+15:00:29 [ir rx]   H:4490   x 2
+15:00:29 [ir rx]   H:5300   x 1
+15:00:29 [ir rx]   H:72340610 x 1
+15:00:29 [ir rx] long pulses (>= 1500 us): H:72340613 L:4341 H:4494 H:1730 H:1730 H:1732 H:1730 H:1730 H:1732 H:1730 H:1735 H:1731 H:1730 H:1731 H:1731 H:1731 H:1730 H:1729 H:1730 H:1732 H:1732 H:1732 H:1733 H:1732 H:1732 H:1732 H:1732 H:5309 L:4341 H:4493 H:1732 H:1733 H:1733 H:1733 H:1733 H:1733 H:1732 H:1732 H:1733 H:1734 H:1732 H:1733 H:1734 H:1734 H:1735 H:1755 H:1670 H:1667 H:1667 H:1666 H:1666 H:1665 H:1665 H:1664
+15:00:29 [ir rx] 200 edges, 23 distinct widths, 54 long pulses
+15:00:29 [ir rx] capture 2: 200 edges
+15:00:29 [ir rx] decode: header 4409/4424 us, 48 bits, inverted, bytes DD 22 80 7F 00 FF
+15:00:29 [ir rx] raw (level:width us):
+15:00:29 [ir rx]  H:59417  L:4409   H:4424   L:518    H:1664   L:517    H:586    L:492  
+15:00:29 [ir rx]  H:1665   L:518    H:1665   L:517    H:1665   L:517    H:585    L:492  
+15:00:29 [ir rx]  H:1665   L:517    H:1666   L:516    H:586    L:492    H:1665   L:517  
+15:00:29 [ir rx]  H:586    L:493    H:585    L:492    H:586    L:492    H:1664   L:518  
+15:00:29 [ir rx]  H:585    L:492    H:587    L:492    H:585    L:493    H:585    L:493  
+15:00:29 [ir rx]  H:585    L:492    H:586    L:492    H:586    L:492    H:586    L:492  
+15:00:29 [ir rx]  H:586    L:492    H:1665   L:517    H:1665   L:517    H:1666   L:517  
+15:00:29 [ir rx]  H:1665   L:517    H:1665   L:517    H:1664   L:517    H:1666   L:516  
+15:00:29 [ir rx]  H:1666   L:517    H:585    L:493    H:585    L:492    H:586    L:492  
+15:00:29 [ir rx]  H:586    L:492    H:586    L:492    H:587    L:490    H:587    L:491  
+15:00:29 [ir rx]  H:586    L:492    H:587    L:491    H:1666   L:516    H:1667   L:515  
+15:00:29 [ir rx]  H:1667   L:515    H:1668   L:514    H:1667   L:515    H:1668   L:514  
+15:00:29 [ir rx]  H:1668   L:514    H:1668   L:513    H:5245   L:4402   H:4432   L:509  
+15:00:29 [ir rx]  H:1673   L:510    H:571    L:506    H:1673   L:484    H:1698   L:484  
+15:00:29 [ir rx]  H:1699   L:482    H:597    L:480    H:1701   L:479    H:1703   L:479  
+15:00:29 [ir rx]  H:622    L:456    H:601    L:475    H:603    L:475    H:604    L:473  
+15:00:29 [ir rx]  H:604    L:474    H:604    L:474    H:623    L:454    H:605    L:449  
+15:00:29 [ir rx]  H:648    L:428    H:1733   L:449    H:650    L:428    H:650    L:427  
+15:00:29 [ir rx]  H:650    L:429    H:649    L:429    H:649    L:429    H:1733   L:447  
+15:00:29 [ir rx]  H:651    L:427    H:651    L:425    H:653    L:425    H:653    L:425  
+15:00:29 [ir rx]  H:653    L:425    H:654    L:423    H:654    L:423    H:655    L:423  
+15:00:29 [ir rx]  H:656    L:422    H:656    L:422    H:656    L:422    H:656    L:421  
+15:00:29 [ir rx]  H:657    L:420    H:658    L:421    H:657    L:420    H:658    L:423  
+15:00:29 [ir rx]  H:1759   L:419    H:1763   L:419    H:1764   L:417    H:1766   L:415  
+15:00:29 [ir rx]  H:1768   L:415    H:1766   L:415    H:664    L:412    H:666    L:412  
+15:00:29 [ir rx] pulse width histogram (level:width us x count):
+15:00:29 [ir rx]   L:410    x 8
+15:00:29 [ir rx]   L:420    x 22
+15:00:29 [ir rx]   L:440    x 3
+15:00:29 [ir rx]   L:450    x 2
+15:00:29 [ir rx]   L:470    x 7
+15:00:29 [ir rx]   L:480    x 4
+15:00:29 [ir rx]   L:490    x 24
+15:00:29 [ir rx]   L:500    x 2
+15:00:29 [ir rx]   L:510    x 26
+15:00:29 [ir rx]   H:570    x 1
+15:00:29 [ir rx]   H:580    x 24
+15:00:29 [ir rx]   H:590    x 1
+15:00:29 [ir rx]   H:600    x 6
+15:00:29 [ir rx]   H:620    x 2
+15:00:29 [ir rx]   H:640    x 3
+15:00:29 [ir rx]   H:650    x 19
+15:00:29 [ir rx]   H:660    x 2
+15:00:29 [ir rx]   H:1660   x 24
+15:00:29 [ir rx]   H:1670   x 2
+15:00:29 [ir rx]   H:1690   x 2
+15:00:29 [ir rx]   H:1700   x 2
+15:00:29 [ir rx]   H:1730   x 2
+15:00:29 [ir rx]   H:1750   x 1
+15:00:29 [ir rx]   H:1760   x 5
+15:00:29 [ir rx]   L:4400   x 2
+15:00:29 [ir rx]   H:4420   x 1
+15:00:29 [ir rx]   H:4430   x 1
+15:00:29 [ir rx]   H:5240   x 1
+15:00:29 [ir rx]   H:59410  x 1
+15:00:29 [ir rx] long pulses (>= 1500 us): H:59417 L:4409 H:4424 H:1664 H:1665 H:1665 H:1665 H:1665 H:1666 H:1665 H:1664 H:1665 H:1665 H:1666 H:1665 H:1665 H:1664 H:1666 H:1666 H:1666 H:1667 H:1667 H:1668 H:1667 H:1668 H:1668 H:1668 H:5245 L:4402 H:4432 H:1673 H:1673 H:1698 H:1699 H:1701 H:1703 H:1733 H:1733 H:1759 H:1763 H:1764 H:1766 H:1768 H:1766
+15:00:29 [ir rx] 200 edges, 29 distinct widths, 44 long pulses
+15:00:31 radio channel 5 (want 5), remote none, last frame from remote 75073ms ago, ir interrupts 400, ir pulses 400, ir glitches 0, ir dropped 0, ir level HIGH
+15:00:36 radio channel 5 (want 5), remote none, last frame from remote 80078ms ago, ir interrupts 400, ir pulses 400, ir glitches 0, ir dropped 0, ir level HIGH
+15:00:41 radio channel 5 (want 5), remote none, last frame from remote 85083ms ago, ir interrupts 400, ir pulses 400, ir glitches 0, ir dropped 0, ir level HIGH
+15:00:46 radio channel 5 (want 5), remote none, last frame from remote 90088ms ago, ir interrupts 400, ir pulses 400, ir glitches 0, ir dropped 0, ir level HIGH
+15:00:51 radio channel 5 (want 5), remote none, last frame from remote 95093ms ago, ir interrupts 400, ir pulses 400, ir glitches 0, ir dropped 0, ir level HIGH
+15:00:56 radio channel 5 (want 5), remote none, last frame from remote 100098ms ago, ir interrupts 400, ir pulses 400, ir glitches 0, ir dropped 0, ir level HIGH
+15:01:01 radio channel 5 (want 5), remote none, last frame from remote 105103ms ago, ir interrupts 400, ir pulses 400, ir glitches 0, ir dropped 0, ir level HIGH
+15:01:03 [ir rx] capture 3: 200 edges
+15:01:03 [ir rx] decode: header 4343/4488 us, 48 bits, inverted, bytes 4D B2 F8 07 20 DF
+15:01:03 [ir rx] raw (level:width us):
+15:01:03 [ir rx]  H:33319854  L:4343   H:4488   L:454    H:1730   L:452    H:651    L:428  
+15:01:03 [ir rx]  H:1729   L:454    H:1728   L:453    H:651    L:428    H:649    L:428  
+15:01:03 [ir rx]  H:1729   L:453    H:650    L:429    H:649    L:429    H:1728   L:453  
+15:01:03 [ir rx]  H:650    L:429    H:649    L:428    H:1728   L:454    H:1729   L:453  
+15:01:03 [ir rx]  H:649    L:429    H:1729   L:452    H:651    L:429    H:650    L:427  
+15:01:03 [ir rx]  H:651    L:427    H:1729   L:453    H:1729   L:454    H:1728   L:454  
+15:01:03 [ir rx]  H:1728   L:453    H:1729   L:453    H:1730   L:452    H:1730   L:453  
+15:01:03 [ir rx]  H:1729   L:453    H:651    L:427    H:652    L:425    H:630    L:449  
+15:01:03 [ir rx]  H:627    L:450    H:630    L:448    H:628    L:451    H:628    L:448  
+15:01:03 [ir rx]  H:629    L:450    H:630    L:448    H:629    L:448    H:1731   L:451  
+15:01:03 [ir rx]  H:629    L:449    H:630    L:448    H:1733   L:450    H:1731   L:449  
+15:01:03 [ir rx]  H:1733   L:450    H:1732   L:455    H:1727   L:450    H:632    L:445  
+15:01:03 [ir rx]  H:1733   L:449    H:1734   L:449    H:5310   L:4315   H:4517   L:428  
+15:01:03 [ir rx]  H:1754   L:429    H:675    L:404    H:1752   L:430    H:1752   L:457  
+15:01:03 [ir rx]  H:646    L:458    H:620    L:462    H:1695   L:514    H:590    L:489  
+15:01:03 [ir rx]  H:588    L:490    H:1667   L:516    H:587    L:491    H:587    L:491  
+15:01:03 [ir rx]  H:1666   L:516    H:1666   L:516    H:587    L:491    H:1666   L:516  
+15:01:03 [ir rx]  H:587    L:491    H:586    L:492    H:586    L:492    H:1666   L:515  
+15:01:03 [ir rx]  H:1667   L:515    H:1667   L:514    H:1668   L:513    H:1669   L:511  
+15:01:03 [ir rx]  H:1671   L:508    H:1674   L:483    H:1699   L:480    H:600    L:474  
+15:01:03 [ir rx]  H:604    L:466    H:612    L:448    H:630    L:449    H:649    L:426  
+15:01:03 [ir rx]  H:651    L:427    H:651    L:427    H:651    L:427    H:651    L:427  
+15:01:03 [ir rx]  H:650    L:428    H:1735   L:445    H:653    L:424    H:654    L:424  
+15:01:03 [ir rx]  H:1758   L:424    H:1758   L:424    H:1759   L:423    H:1759   L:422  
+15:01:03 [ir rx]  H:1761   L:422    H:656    L:422    H:1760   L:421    H:1761   L:421  
+15:01:03 [ir rx] pulse width histogram (level:width us x count):
+15:01:03 [ir rx]   L:400    x 1
+15:01:03 [ir rx]   L:420    x 31
+15:01:03 [ir rx]   L:430    x 1
+15:01:03 [ir rx]   L:440    x 14
+15:01:03 [ir rx]   L:450    x 27
+15:01:03 [ir rx]   L:460    x 2
+15:01:03 [ir rx]   L:470    x 1
+15:01:03 [ir rx]   L:480    x 3
+15:01:03 [ir rx]   L:490    x 7
+15:01:03 [ir rx]   L:500    x 1
+15:01:03 [ir rx]   L:510    x 10
+15:01:03 [ir rx]   H:580    x 7
+15:01:03 [ir rx]   H:590    x 1
+15:01:03 [ir rx]   H:600    x 2
+15:01:03 [ir rx]   H:610    x 1
+15:01:03 [ir rx]   H:620    x 7
+15:01:03 [ir rx]   H:630    x 6
+15:01:03 [ir rx]   H:640    x 6
+15:01:03 [ir rx]   H:650    x 17
+15:01:03 [ir rx]   H:670    x 1
+15:01:03 [ir rx]   H:1660   x 9
+15:01:03 [ir rx]   H:1670   x 2
+15:01:03 [ir rx]   H:1690   x 2
+15:01:03 [ir rx]   H:1720   x 14
+15:01:03 [ir rx]   H:1730   x 11
+15:01:03 [ir rx]   H:1750   x 7
+15:01:03 [ir rx]   H:1760   x 3
+15:01:03 [ir rx]   L:4310   x 1
+15:01:03 [ir rx]   L:4340   x 1
+15:01:03 [ir rx]   H:4480   x 1
+15:01:03 [ir rx]   H:4510   x 1
+15:01:03 [ir rx]   H:5310   x 1
+15:01:03 [ir rx]   H:33319850 x 1
+15:01:03 [ir rx] long pulses (>= 1500 us): H:33319854 L:4343 H:4488 H:1730 H:1729 H:1728 H:1729 H:1728 H:1728 H:1729 H:1729 H:1729 H:1729 H:1728 H:1728 H:1729 H:1730 H:1730 H:1729 H:1731 H:1733 H:1731 H:1733 H:1732 H:1727 H:1733 H:1734 H:5310 L:4315 H:4517 H:1754 H:1752 H:1752 H:1695 H:1667 H:1666 H:1666 H:1666 H:1666 H:1667 H:1667 H:1668 H:1669 H:1671 H:1674 H:1699 H:1735 H:1758 H:1758 H:1759 H:1759 H:1761 H:1760 H:1761
+15:01:03 [ir rx] 200 edges, 33 distinct widths, 54 long pulses
+15:01:03 [ir rx] capture 4: 200 edges
+15:01:03 [ir rx] decode: header 4313/4520 us, 48 bits, inverted, bytes DD 22 80 7F 00 FF
+15:01:03 [ir rx] raw (level:width us):
+15:01:03 [ir rx]  H:59556  L:4313   H:4520   L:423    H:1760   L:421    H:657    L:420  
+15:01:03 [ir rx]  H:1762   L:421    H:1761   L:421    H:1761   L:421    H:657    L:421  
+15:01:03 [ir rx]  H:1761   L:421    H:1761   L:421    H:658    L:420    H:1762   L:420  
+15:01:03 [ir rx]  H:657    L:421    H:657    L:421    H:658    L:422    H:1760   L:420  
+15:01:03 [ir rx]  H:657    L:420    H:659    L:419    H:659    L:419    H:659    L:419  
+15:01:03 [ir rx]  H:658    L:420    H:658    L:419    H:660    L:418    H:659    L:420  
+15:01:03 [ir rx]  H:659    L:419    H:1763   L:418    H:1764   L:418    H:1765   L:418  
+15:01:03 [ir rx]  H:1764   L:417    H:1765   L:418    H:1764   L:418    H:1765   L:417  
+15:01:03 [ir rx]  H:1765   L:417    H:663    L:414    H:661    L:418    H:661    L:417  
+15:01:03 [ir rx]  H:661    L:416    H:662    L:416    H:662    L:416    H:662    L:416  
+15:01:03 [ir rx]  H:662    L:416    H:662    L:416    H:1766   L:416    H:1766   L:416  
+15:01:03 [ir rx]  H:1767   L:415    H:1767   L:415    H:1767   L:415    H:1767   L:414  
+15:01:03 [ir rx]  H:1769   L:413    H:1770   L:412    H:5345   L:4304   H:4532   L:411  
+15:01:03 [ir rx]  H:1771   L:411    H:667    L:411    H:1772   L:411    H:1771   L:411  
+15:01:03 [ir rx]  H:1771   L:411    H:668    L:411    H:1771   L:411    H:1772   L:411  
+15:01:03 [ir rx]  H:667    L:410    H:667    L:411    H:668    L:410    H:667    L:411  
+15:01:03 [ir rx]  H:668    L:410    H:667    L:412    H:667    L:410    H:668    L:411  
+15:01:03 [ir rx]  H:667    L:410    H:1772   L:410    H:668    L:410    H:668    L:410  
+15:01:03 [ir rx]  H:668    L:410    H:668    L:410    H:691    L:387    H:1796   L:386  
+15:01:03 [ir rx]  H:691    L:387    H:692    L:386    H:692    L:386    H:692    L:386  
+15:01:03 [ir rx]  H:692    L:386    H:692    L:386    H:692    L:386    H:692    L:386  
+15:01:03 [ir rx]  H:692    L:386    H:691    L:386    H:692    L:386    H:692    L:386  
+15:01:03 [ir rx]  H:692    L:386    H:693    L:385    H:692    L:386    H:692    L:385  
+15:01:03 [ir rx]  H:1797   L:386    H:1797   L:386    H:1796   L:386    H:1796   L:386  
+15:01:03 [ir rx]  H:1796   L:385    H:1798   L:384    H:694    L:385    H:692    L:385  
+15:01:03 [ir rx] pulse width histogram (level:width us x count):
+15:01:03 [ir rx]   L:380    x 26
+15:01:03 [ir rx]   L:410    x 54
+15:01:03 [ir rx]   L:420    x 18
+15:01:03 [ir rx]   H:650    x 14
+15:01:03 [ir rx]   H:660    x 25
+15:01:03 [ir rx]   H:690    x 19
+15:01:03 [ir rx]   H:1760   x 23
+15:01:03 [ir rx]   H:1770   x 8
+15:01:03 [ir rx]   H:1790   x 7
+15:01:03 [ir rx]   L:4300   x 1
+15:01:03 [ir rx]   L:4310   x 1
+15:01:03 [ir rx]   H:4520   x 1
+15:01:03 [ir rx]   H:4530   x 1
+15:01:03 [ir rx]   H:5340   x 1
+15:01:03 [ir rx]   H:59550  x 1
+15:01:03 [ir rx] long pulses (>= 1500 us): H:59556 L:4313 H:4520 H:1760 H:1762 H:1761 H:1761 H:1761 H:1761 H:1762 H:1760 H:1763 H:1764 H:1765 H:1764 H:1765 H:1764 H:1765 H:1765 H:1766 H:1766 H:1767 H:1767 H:1767 H:1767 H:1769 H:1770 H:5345 L:4304 H:4532 H:1771 H:1772 H:1771 H:1771 H:1771 H:1772 H:1772 H:1796 H:1797 H:1797 H:1796 H:1796 H:1796 H:1798
+15:01:03 [ir rx] 200 edges, 15 distinct widths, 44 long pulses
+15:01:06 radio channel 5 (want 5), remote none, last frame from remote 110107ms ago, ir interrupts 800, ir pulses 800, ir glitches 0, ir dropped 0, ir level HIGH
+15:01:11 radio channel 5 (want 5), remote none, last frame from remote 115112ms ago, ir interrupts 800, ir pulses 800, ir glitches 0, ir dropped 0, ir level HIGH
+15:01:15 frame from remote, type 1, channel 5
+15:01:15 Paired remote 28:05:A5:25:C9:88
+15:01:16 radio channel 5 (want 5), remote paired, last frame from remote 895ms ago, ir interrupts 800, ir pulses 800, ir glitches 0, ir dropped 0, ir level HIGH
+15:01:18 frame from remote, type 1, channel 5
+15:01:21 radio channel 5 (want 5), remote paired, last frame from remote 0ms ago, ir interrupts 800, ir pulses 800, ir glitches 0, ir dropped 0, ir level HIGH
+15:01:21 frame from remote, type 1, channel 5
+15:01:24 frame from remote, type 1, channel 5
+15:01:26 radio channel 5 (want 5), remote paired, last frame from remote 20ms ago, ir interrupts 800, ir pulses 800, ir glitches 0, ir dropped 0, ir level HIGH
+15:01:27 frame from remote, type 1, channel 5
+15:01:30 frame from remote, type 1, channel 5
+15:01:31 radio channel 5 (want 5), remote paired, last frame from remote 0ms ago, ir interrupts 800, ir pulses 800, ir glitches 0, ir dropped 0, ir level HIGH
+15:01:33 frame from remote, type 1, channel 5
+15:01:36 radio channel 5 (want 5), remote paired, last frame from remote 5ms ago, ir interrupts 800, ir pulses 800, ir glitches 0, ir dropped 0, ir level HIGH
+15:01:36 frame from remote, type 1, channel 5
+15:01:37 [ir rx] capture 5: 200 edges
+15:01:37 [ir rx] decode: header 4318/4519 us, 48 bits, inverted, bytes 4D B2 FD 02 27 D8
+15:01:37 [ir rx] raw (level:width us):
+15:01:37 [ir rx]  H:34198817  L:4318   H:4519   L:424    H:1756   L:427    H:676    L:402  
+15:01:37 [ir rx]  H:1755   L:428    H:1754   L:426    H:677    L:402    H:676    L:401  
+15:01:37 [ir rx]  H:1755   L:428    H:676    L:405    H:673    L:404    H:1752   L:456  
+15:01:37 [ir rx]  H:648    L:406    H:672    L:406    H:1751   L:431    H:1750   L:432  
+15:01:37 [ir rx]  H:673    L:405    H:1751   L:457    H:1725   L:457    H:647    L:406  
+15:01:37 [ir rx]  H:1752   L:430    H:1751   L:483    H:1699   L:457    H:1725   L:483  
+15:01:37 [ir rx]  H:1699   L:483    H:1699   L:483    H:621    L:457    H:1700   L:486  
+15:01:37 [ir rx]  H:617    L:461    H:617    L:459    H:619    L:459    H:619    L:461  
+15:01:37 [ir rx]  H:617    L:463    H:616    L:488    H:1669   L:487    H:1695   L:512  
+15:01:37 [ir rx]  H:1670   L:516    H:587    L:490    H:588    L:489    H:1666   L:518  
+15:01:37 [ir rx]  H:587    L:489    H:590    L:491    H:586    L:491    H:588    L:498  
+15:01:37 [ir rx]  H:579    L:493    H:1666   L:514    H:1666   L:517    H:587    L:490  
+15:01:37 [ir rx]  H:1667   L:517    H:1664   L:517    H:5239   L:4411   H:4423   L:518  
+15:01:37 [ir rx]  H:1664   L:518    H:586    L:493    H:1663   L:518    H:1666   L:516  
+15:01:37 [ir rx]  H:586    L:492    H:586    L:492    H:1665   L:517    H:585    L:492  
+15:01:37 [ir rx]  H:586    L:492    H:1664   L:517    H:586    L:492    H:586    L:493  
+15:01:37 [ir rx]  H:1664   L:517    H:1666   L:516    H:586    L:492    H:1666   L:517  
+15:01:37 [ir rx]  H:1666   L:514    H:587    L:490    H:1668   L:513    H:1669   L:513  
+15:01:37 [ir rx]  H:1669   L:511    H:1671   L:509    H:1674   L:481    H:1702   L:477  
+15:01:37 [ir rx]  H:601    L:476    H:1705   L:452    H:628    L:458    H:619    L:448  
+15:01:37 [ir rx]  H:650    L:426    H:651    L:428    H:650    L:428    H:650    L:429  
+15:01:37 [ir rx]  H:1733   L:448    H:1735   L:446    H:1735   L:446    H:652    L:426  
+15:01:37 [ir rx]  H:652    L:426    H:1756   L:426    H:652    L:425    H:654    L:423  
+15:01:37 [ir rx]  H:654    L:423    H:656    L:422    H:656    L:423    H:1759   L:422  
+15:01:37 [ir rx]  H:1761   L:421    H:657    L:420    H:1761   L:421    H:1762   L:420  
+15:01:37 [ir rx] pulse width histogram (level:width us x count):
+15:01:37 [ir rx]   L:400    x 9
+15:01:37 [ir rx]   L:420    x 22
+15:01:37 [ir rx]   L:430    x 3
+15:01:37 [ir rx]   L:440    x 4
+15:01:37 [ir rx]   L:450    x 9
+15:01:37 [ir rx]   L:460    x 3
+15:01:37 [ir rx]   L:470    x 2
+15:01:37 [ir rx]   L:480    x 10
+15:01:37 [ir rx]   L:490    x 15
+15:01:37 [ir rx]   L:500    x 1
+15:01:37 [ir rx]   L:510    x 20
+15:01:37 [ir rx]   H:570    x 1
+15:01:37 [ir rx]   H:580    x 15
+15:01:37 [ir rx]   H:590    x 1
+15:01:37 [ir rx]   H:600    x 1
+15:01:37 [ir rx]   H:610    x 7
+15:01:37 [ir rx]   H:620    x 2
+15:01:37 [ir rx]   H:640    x 2
+15:01:37 [ir rx]   H:650    x 12
+15:01:37 [ir rx]   H:670    x 7
+15:01:37 [ir rx]   H:1660   x 18
+15:01:37 [ir rx]   H:1670   x 3
+15:01:37 [ir rx]   H:1690   x 4
+15:01:37 [ir rx]   H:1700   x 3
+15:01:37 [ir rx]   H:1720   x 2
+15:01:37 [ir rx]   H:1730   x 3
+15:01:37 [ir rx]   H:1750   x 12
+15:01:37 [ir rx]   H:1760   x 3
+15:01:37 [ir rx]   L:4310   x 1
+15:01:37 [ir rx]   L:4410   x 1
+15:01:37 [ir rx]   H:4420   x 1
+15:01:37 [ir rx]   H:4510   x 1
+15:01:37 [ir rx]   H:5230   x 1
+15:01:37 [ir rx]   H:34198810 x 1
+15:01:37 [ir rx] long pulses (>= 1500 us): H:34198817 L:4318 H:4519 H:1756 H:1755 H:1754 H:1755 H:1752 H:1751 H:1750 H:1751 H:1725 H:1752 H:1751 H:1699 H:1725 H:1699 H:1699 H:1700 H:1669 H:1695 H:1670 H:1666 H:1666 H:1666 H:1667 H:1664 H:5239 L:4411 H:4423 H:1664 H:1663 H:1666 H:1665 H:1664 H:1664 H:1666 H:1666 H:1666 H:1668 H:1669 H:1669 H:1671 H:1674 H:1702 H:1705 H:1733 H:1735 H:1735 H:1756 H:1759 H:1761 H:1761 H:1762
+15:01:37 [ir rx] 200 edges, 34 distinct widths, 54 long pulses
+15:01:38 [ir rx] capture 6: 200 edges
+15:01:38 [ir rx] decode: header 4313/4519 us, 48 bits, inverted, bytes DD 22 80 7F 00 FF
+15:01:38 [ir rx] raw (level:width us):
+15:01:38 [ir rx]  H:59827  L:4313   H:4519   L:422    H:1761   L:422    H:656    L:423  
+15:01:38 [ir rx]  H:1759   L:421    H:1762   L:420    H:1762   L:421    H:661    L:416  
+15:01:38 [ir rx]  H:1762   L:421    H:1761   L:421    H:657    L:421    H:1761   L:421  
+15:01:38 [ir rx]  H:657    L:421    H:657    L:421    H:657    L:421    H:1763   L:419  
+15:01:38 [ir rx]  H:658    L:420    H:657    L:421    H:657    L:420    H:658    L:420  
+15:01:38 [ir rx]  H:658    L:419    H:660    L:420    H:657    L:420    H:658    L:419  
+15:01:38 [ir rx]  H:659    L:419    H:1763   L:419    H:1763   L:418    H:1764   L:418  
+15:01:38 [ir rx]  H:1765   L:419    H:1763   L:417    H:1766   L:418    H:1763   L:418  
+15:01:38 [ir rx]  H:1764   L:419    H:660    L:416    H:662    L:417    H:661    L:417  
+15:01:38 [ir rx]  H:661    L:417    H:661    L:417    H:661    L:416    H:662    L:417  
+15:01:38 [ir rx]  H:661    L:417    H:661    L:417    H:1765   L:416    H:1766   L:416  
+15:01:38 [ir rx]  H:1767   L:414    H:1769   L:413    H:1768   L:414    H:1774   L:407  
+15:01:38 [ir rx]  H:1769   L:413    H:1770   L:412    H:5346   L:4302   H:4532   L:410  
+15:01:38 [ir rx]  H:1771   L:412    H:666    L:412    H:1770   L:412    H:1770   L:411  
+15:01:38 [ir rx]  H:1772   L:410    H:667    L:411    H:1773   L:410    H:1770   L:412  
+15:01:38 [ir rx]  H:667    L:411    H:666    L:416    H:663    L:415    H:662    L:411  
+15:01:38 [ir rx]  H:667    L:412    H:666    L:411    H:667    L:411    H:667    L:411  
+15:01:38 [ir rx]  H:667    L:411    H:1771   L:411    H:667    L:411    H:668    L:410  
+15:01:38 [ir rx]  H:667    L:412    H:667    L:411    H:667    L:411    H:1771   L:411  
+15:01:38 [ir rx]  H:667    L:411    H:667    L:412    H:667    L:410    H:675    L:402  
+15:01:38 [ir rx]  H:692    L:387    H:691    L:387    H:690    L:387    H:691    L:387  
+15:01:38 [ir rx]  H:691    L:387    H:691    L:387    H:691    L:387    H:691    L:389  
+15:01:38 [ir rx]  H:689    L:387    H:691    L:386    H:692    L:387    H:691    L:387  
+15:01:38 [ir rx]  H:1796   L:386    H:1796   L:386    H:1797   L:386    H:1795   L:387  
+15:01:38 [ir rx]  H:1795   L:387    H:1796   L:386    H:692    L:387    H:691    L:386  
+15:01:38 [ir rx] pulse width histogram (level:width us x count):
+15:01:38 [ir rx]   L:380    x 20
+15:01:38 [ir rx]   L:400    x 2
+15:01:38 [ir rx]   L:410    x 57
+15:01:38 [ir rx]   L:420    x 19
+15:01:38 [ir rx]   H:650    x 13
+15:01:38 [ir rx]   H:660    x 30
+15:01:38 [ir rx]   H:670    x 1
+15:01:38 [ir rx]   H:680    x 1
+15:01:38 [ir rx]   H:690    x 13
+15:01:38 [ir rx]   H:1750   x 1
+15:01:38 [ir rx]   H:1760   x 21
+15:01:38 [ir rx]   H:1770   x 10
+15:01:38 [ir rx]   H:1790   x 6
+15:01:38 [ir rx]   L:4300   x 1
+15:01:38 [ir rx]   L:4310   x 1
+15:01:38 [ir rx]   H:4510   x 1
+15:01:38 [ir rx]   H:4530   x 1
+15:01:38 [ir rx]   H:5340   x 1
+15:01:38 [ir rx]   H:59820  x 1
+15:01:38 [ir rx] long pulses (>= 1500 us): H:59827 L:4313 H:4519 H:1761 H:1759 H:1762 H:1762 H:1762 H:1761 H:1761 H:1763 H:1763 H:1763 H:1764 H:1765 H:1763 H:1766 H:1763 H:1764 H:1765 H:1766 H:1767 H:1769 H:1768 H:1774 H:1769 H:1770 H:5346 L:4302 H:4532 H:1771 H:1770 H:1770 H:1772 H:1773 H:1770 H:1771 H:1771 H:1796 H:1796 H:1797 H:1795 H:1795 H:1796
+15:01:38 [ir rx] 200 edges, 19 distinct widths, 44 long pulses
+15:01:39 frame from remote, type 1, channel 5
+15:01:41 radio channel 5 (want 5), remote paired, last frame from remote 10ms ago, ir interrupts 1200, ir pulses 1200, ir glitches 0, ir dropped 0, ir level HIGH
+15:01:42 frame from remote, type 1, channel 5
+15:01:45 frame from remote, type 1, channel 5
+15:01:46 radio channel 5 (want 5), remote paired, last frame from remote 0ms ago, ir interrupts 1200, ir pulses 1200, ir glitches 0, ir dropped 0, ir level HIGH
+15:01:48 [ir rx] capture 7: 200 edges
+15:01:48 [ir rx] decode: header 4338/4496 us, 48 bits, inverted, bytes 4D B2 FD 02 30 CF
+15:01:48 [ir rx] raw (level:width us):
+15:01:48 [ir rx]  H:10397773  L:4338   H:4496   L:425    H:1755   L:434    H:646    L:444  
+15:01:48 [ir rx]  H:1736   L:448    H:1735   L:445    H:635    L:424    H:656    L:421  
+15:01:48 [ir rx]  H:1757   L:426    H:676    L:402    H:677    L:401    H:1755   L:428  
+15:01:48 [ir rx]  H:675    L:404    H:674    L:405    H:1752   L:433    H:1750   L:456  
+15:01:48 [ir rx]  H:647    L:407    H:1750   L:484    H:1705   L:479    H:618    L:488  
+15:01:48 [ir rx]  H:1670   L:513    H:1667   L:516    H:1667   L:516    H:1665   L:517  
+15:01:48 [ir rx]  H:1665   L:516    H:1667   L:516    H:586    L:492    H:1665   L:518  
+15:01:48 [ir rx]  H:586    L:491    H:587    L:491    H:586    L:492    H:586    L:492  
+15:01:48 [ir rx]  H:587    L:491    H:585    L:492    H:586    L:491    H:587    L:492  
+15:01:48 [ir rx]  H:586    L:491    H:586    L:491    H:1667   L:515    H:1668   L:513  
+15:01:48 [ir rx]  H:588    L:490    H:588    L:488    H:1670   L:510    H:1672   L:483  
+15:01:48 [ir rx]  H:1699   L:480    H:1703   L:477    H:603    L:472    H:605    L:449  
+15:01:48 [ir rx]  H:1731   L:449    H:1732   L:477    H:5282   L:4337   H:4498   L:443  
+15:01:48 [ir rx]  H:1757   L:426    H:653    L:425    H:1757   L:426    H:1756   L:424  
+15:01:48 [ir rx]  H:654    L:423    H:655    L:423    H:1760   L:423    H:656    L:421  
+15:01:48 [ir rx]  H:656    L:422    H:1760   L:422    H:657    L:421    H:657    L:420  
+15:01:48 [ir rx]  H:1762   L:420    H:1763   L:419    H:659    L:418    H:1764   L:418  
+15:01:48 [ir rx]  H:1765   L:416    H:661    L:417    H:1766   L:416    H:1766   L:414  
+15:01:48 [ir rx]  H:1769   L:412    H:1772   L:410    H:1771   L:411    H:1772   L:411  
+15:01:48 [ir rx]  H:667    L:410    H:1772   L:411    H:667    L:411    H:668    L:409  
+15:01:48 [ir rx]  H:691    L:388    H:690    L:387    H:691    L:387    H:691    L:388  
+15:01:48 [ir rx]  H:691    L:387    H:690    L:387    H:692    L:386    H:691    L:387  
+15:01:48 [ir rx]  H:1795   L:387    H:1795   L:387    H:691    L:387    H:692    L:387  
+15:01:48 [ir rx]  H:1795   L:386    H:1796   L:386    H:1796   L:386    H:1796   L:386  
+15:01:48 [ir rx]  H:692    L:386    H:692    L:386    H:1797   L:384    H:1798   L:385  
+15:01:48 [ir rx] pulse width histogram (level:width us x count):
+15:01:48 [ir rx]   L:380    x 20
+15:01:48 [ir rx]   L:400    x 6
+15:01:48 [ir rx]   L:410    x 14
+15:01:48 [ir rx]   L:420    x 18
+15:01:48 [ir rx]   L:430    x 2
+15:01:48 [ir rx]   L:440    x 6
+15:01:48 [ir rx]   L:450    x 1
+15:01:48 [ir rx]   L:470    x 4
+15:01:48 [ir rx]   L:480    x 5
+15:01:48 [ir rx]   L:490    x 12
+15:01:48 [ir rx]   L:510    x 10
+15:01:48 [ir rx]   H:580    x 13
+15:01:48 [ir rx]   H:600    x 2
+15:01:48 [ir rx]   H:610    x 1
+15:01:48 [ir rx]   H:630    x 1
+15:01:48 [ir rx]   H:640    x 2
+15:01:48 [ir rx]   H:650    x 9
+15:01:48 [ir rx]   H:660    x 4
+15:01:48 [ir rx]   H:670    x 4
+15:01:48 [ir rx]   H:690    x 12
+15:01:48 [ir rx]   H:1660   x 8
+15:01:48 [ir rx]   H:1670   x 3
+15:01:48 [ir rx]   H:1690   x 1
+15:01:48 [ir rx]   H:1700   x 2
+15:01:48 [ir rx]   H:1730   x 4
+15:01:48 [ir rx]   H:1750   x 9
+15:01:48 [ir rx]   H:1760   x 9
+15:01:48 [ir rx]   H:1770   x 4
+15:01:48 [ir rx]   H:1790   x 8
+15:01:48 [ir rx]   L:4330   x 2
+15:01:48 [ir rx]   H:4490   x 2
+15:01:48 [ir rx]   H:5280   x 1
+15:01:48 [ir rx]   H:10397770 x 1
+15:01:48 [ir rx] long pulses (>= 1500 us): H:10397773 L:4338 H:4496 H:1755 H:1736 H:1735 H:1757 H:1755 H:1752 H:1750 H:1750 H:1705 H:1670 H:1667 H:1667 H:1665 H:1665 H:1667 H:1665 H:1667 H:1668 H:1670 H:1672 H:1699 H:1703 H:1731 H:1732 H:5282 L:4337 H:4498 H:1757 H:1757 H:1756 H:1760 H:1760 H:1762 H:1763 H:1764 H:1765 H:1766 H:1766 H:1769 H:1772 H:1771 H:1772 H:1772 H:1795 H:1795 H:1795 H:1796 H:1796 H:1796 H:1797 H:1798
+15:01:48 [ir rx] 200 edges, 33 distinct widths, 54 long pulses
+15:01:48 frame from remote, type 1, channel 5
+15:01:48 [ir rx] capture 8: 200 edges
+15:01:48 [ir rx] decode: header 4302/4531 us, 48 bits, inverted, bytes DD 22 80 7F 00 FF
+15:01:48 [ir rx] raw (level:width us):
+15:01:48 [ir rx]  H:59857  L:4302   H:4531   L:412    H:1770   L:412    H:666    L:412  
+15:01:48 [ir rx]  H:1771   L:411    H:1771   L:411    H:1771   L:411    H:667    L:412  
+15:01:48 [ir rx]  H:1771   L:411    H:1770   L:412    H:667    L:411    H:1770   L:412  
+15:01:48 [ir rx]  H:667    L:410    H:667    L:411    H:672    L:405    H:1773   L:410  
+15:01:48 [ir rx]  H:667    L:411    H:667    L:411    H:667    L:411    H:667    L:410  
+15:01:48 [ir rx]  H:668    L:411    H:666    L:412    H:666    L:411    H:667    L:412  
+15:01:48 [ir rx]  H:667    L:410    H:1771   L:412    H:1770   L:412    H:1771   L:411  
+15:01:48 [ir rx]  H:1771   L:412    H:1770   L:411    H:1771   L:411    H:1771   L:411  
+15:01:48 [ir rx]  H:1771   L:412    H:666    L:411    H:667    L:412    H:666    L:411  
+15:01:48 [ir rx]  H:667    L:411    H:668    L:410    H:667    L:411    H:672    L:406  
+15:01:48 [ir rx]  H:666    L:412    H:667    L:411    H:1770   L:412    H:1771   L:411  
+15:01:48 [ir rx]  H:1771   L:411    H:1771   L:411    H:1771   L:411    H:1772   L:410  
+15:01:48 [ir rx]  H:1772   L:411    H:1771   L:411    H:5347   L:4305   H:4529   L:410  
+15:01:48 [ir rx]  H:1773   L:409    H:668    L:411    H:1771   L:411    H:1771   L:411  
+15:01:48 [ir rx]  H:1771   L:411    H:667    L:411    H:1771   L:411    H:1772   L:410  
+15:01:48 [ir rx]  H:667    L:412    H:666    L:411    H:667    L:411    H:667    L:411  
+15:01:48 [ir rx]  H:667    L:411    H:667    L:411    H:673    L:405    H:667    L:411  
+15:01:48 [ir rx]  H:667    L:411    H:1771   L:411    H:667    L:411    H:667    L:411  
+15:01:48 [ir rx]  H:667    L:411    H:667    L:411    H:668    L:410    H:1795   L:387  
+15:01:48 [ir rx]  H:691    L:387    H:691    L:388    H:690    L:387    H:691    L:387  
+15:01:48 [ir rx]  H:691    L:387    H:691    L:387    H:691    L:388    H:690    L:387  
+15:01:48 [ir rx]  H:691    L:387    H:691    L:387    H:691    L:387    H:691    L:387  
+15:01:48 [ir rx]  H:691    L:387    H:692    L:386    H:691    L:387    H:691    L:386  
+15:01:48 [ir rx]  H:1796   L:387    H:1795   L:387    H:1796   L:386    H:1797   L:385  
+15:01:48 [ir rx]  H:1796   L:386    H:1797   L:386    H:692    L:386    H:691    L:387  
+15:01:48 [ir rx] pulse width histogram (level:width us x count):
+15:01:48 [ir rx]   L:380    x 25
+15:01:48 [ir rx]   L:400    x 4
+15:01:48 [ir rx]   L:410    x 69
+15:01:48 [ir rx]   H:660    x 37
+15:01:48 [ir rx]   H:670    x 3
+15:01:48 [ir rx]   H:690    x 18
+15:01:48 [ir rx]   H:1770   x 31
+15:01:48 [ir rx]   H:1790   x 7
+15:01:48 [ir rx]   L:4300   x 2
+15:01:48 [ir rx]   H:4520   x 1
+15:01:48 [ir rx]   H:4530   x 1
+15:01:48 [ir rx]   H:5340   x 1
+15:01:48 [ir rx]   H:59850  x 1
+15:01:48 [ir rx] long pulses (>= 1500 us): H:59857 L:4302 H:4531 H:1770 H:1771 H:1771 H:1771 H:1771 H:1770 H:1770 H:1773 H:1771 H:1770 H:1771 H:1771 H:1770 H:1771 H:1771 H:1771 H:1770 H:1771 H:1771 H:1771 H:1771 H:1772 H:1772 H:1771 H:5347 L:4305 H:4529 H:1773 H:1771 H:1771 H:1771 H:1771 H:1772 H:1771 H:1795 H:1796 H:1795 H:1796 H:1797 H:1796 H:1797
+15:01:48 [ir rx] 200 edges, 13 distinct widths, 44 long pulses
+15:01:51 radio channel 5 (want 5), remote paired, last frame from remote 10ms ago, ir interrupts 1600, ir pulses 1600, ir glitches 0, ir dropped 0, ir level HIGH
+15:01:51 frame from remote, type 1, channel 5
+15:01:54 frame from remote, type 1, channel 5
+15:01:56 radio channel 5 (want 5), remote paired, last frame from remote 0ms ago, ir interrupts 1600, ir pulses 1600, ir glitches 0, ir dropped 0, ir level HIGH
+15:01:57 frame from remote, type 1, channel 5
+15:01:58 [ir rx] capture 9: 200 edges
+15:01:58 [ir rx] decode: header 4340/4491 us, 48 bits, inverted, bytes 4D B2 FD 02 00 FF
+15:01:58 [ir rx] raw (level:width us):
+15:01:58 [ir rx]  H:9171750  L:4340   H:4491   L:451    H:1732   L:450    H:629    L:448  
+15:01:58 [ir rx]  H:1733   L:450    H:1731   L:451    H:633    L:444    H:632    L:447  
+15:01:58 [ir rx]  H:1730   L:452    H:631    L:446    H:653    L:425    H:1731   L:452  
+15:01:58 [ir rx]  H:652    L:424    H:653    L:448    H:1709   L:451    H:1731   L:452  
+15:01:58 [ir rx]  H:651    L:425    H:1732   L:449    H:1734   L:450    H:654    L:423  
+15:01:58 [ir rx]  H:1733   L:450    H:1731   L:450    H:1732   L:450    H:1733   L:449  
+15:01:58 [ir rx]  H:1733   L:448    H:1738   L:445    H:654    L:423    H:1734   L:448  
+15:01:58 [ir rx]  H:655    L:422    H:656    L:420    H:658    L:419    H:659    L:419  
+15:01:58 [ir rx]  H:659    L:419    H:659    L:422    H:656    L:418    H:660    L:400  
+15:01:58 [ir rx]  H:678    L:400    H:678    L:400    H:678    L:400    H:678    L:400  
+15:01:58 [ir rx]  H:678    L:400    H:677    L:400    H:1756   L:427    H:1756   L:427  
+15:01:58 [ir rx]  H:1754   L:428    H:1756   L:426    H:1756   L:427    H:1754   L:427  
+15:01:58 [ir rx]  H:1755   L:428    H:1755   L:429    H:5329   L:4322   H:4512   L:430  
+15:01:58 [ir rx]  H:1752   L:430    H:672    L:406    H:1751   L:431    H:1753   L:430  
+15:01:58 [ir rx]  H:672    L:430    H:648    L:431    H:1726   L:482    H:622    L:488  
+15:01:58 [ir rx]  H:589    L:463    H:1698   L:504    H:596    L:489    H:589    L:491  
+15:01:58 [ir rx]  H:1666   L:516    H:1666   L:516    H:587    L:491    H:1667   L:516  
+15:01:58 [ir rx]  H:1666   L:516    H:586    L:492    H:1666   L:516    H:1667   L:515  
+15:01:58 [ir rx]  H:1666   L:518    H:1666   L:515    H:1666   L:516    H:1667   L:514  
+15:01:58 [ir rx]  H:588    L:489    H:1669   L:512    H:590    L:485    H:593    L:459  
+15:01:58 [ir rx]  H:597    L:478    H:602    L:473    H:603    L:473    H:625    L:429  
+15:01:58 [ir rx]  H:628    L:449    H:630    L:446    H:651    L:427    H:651    L:425  
+15:01:58 [ir rx]  H:652    L:426    H:652    L:427    H:651    L:428    H:650    L:427  
+15:01:58 [ir rx]  H:1735   L:445    H:1738   L:444    H:1758   L:424    H:1758   L:424  
+15:01:58 [ir rx]  H:1758   L:424    H:1759   L:423    H:1758   L:423    H:1761   L:420  
+15:01:58 [ir rx] pulse width histogram (level:width us x count):
+15:01:58 [ir rx]   L:400    x 8
+15:01:58 [ir rx]   L:410    x 4
+15:01:58 [ir rx]   L:420    x 29
+15:01:58 [ir rx]   L:430    x 6
+15:01:58 [ir rx]   L:440    x 14
+15:01:58 [ir rx]   L:450    x 13
+15:01:58 [ir rx]   L:460    x 1
+15:01:58 [ir rx]   L:470    x 3
+15:01:58 [ir rx]   L:480    x 5
+15:01:58 [ir rx]   L:490    x 3
+15:01:58 [ir rx]   L:500    x 1
+15:01:58 [ir rx]   L:510    x 11
+15:01:58 [ir rx]   H:580    x 5
+15:01:58 [ir rx]   H:590    x 4
+15:01:58 [ir rx]   H:600    x 2
+15:01:58 [ir rx]   H:620    x 4
+15:01:58 [ir rx]   H:630    x 4
+15:01:58 [ir rx]   H:640    x 1
+15:01:58 [ir rx]   H:650    x 19
+15:01:58 [ir rx]   H:660    x 1
+15:01:58 [ir rx]   H:670    x 8
+15:01:58 [ir rx]   H:1660   x 11
+15:01:58 [ir rx]   H:1690   x 1
+15:01:58 [ir rx]   H:1700   x 1
+15:01:58 [ir rx]   H:1720   x 1
+15:01:58 [ir rx]   H:1730   x 17
+15:01:58 [ir rx]   H:1750   x 16
+15:01:58 [ir rx]   H:1760   x 1
+15:01:58 [ir rx]   L:4320   x 1
+15:01:58 [ir rx]   L:4340   x 1
+15:01:58 [ir rx]   H:4490   x 1
+15:01:58 [ir rx]   H:4510   x 1
+15:01:58 [ir rx]   H:5320   x 1
+15:01:58 [ir rx]   H:9171750 x 1
+15:01:58 [ir rx] long pulses (>= 1500 us): H:9171750 L:4340 H:4491 H:1732 H:1733 H:1731 H:1730 H:1731 H:1709 H:1731 H:1732 H:1734 H:1733 H:1731 H:1732 H:1733 H:1733 H:1738 H:1734 H:1756 H:1756 H:1754 H:1756 H:1756 H:1754 H:1755 H:1755 H:5329 L:4322 H:4512 H:1752 H:1751 H:1753 H:1726 H:1698 H:1666 H:1666 H:1667 H:1666 H:1666 H:1667 H:1666 H:1666 H:1666 H:1667 H:1669 H:1735 H:1738 H:1758 H:1758 H:1758 H:1759 H:1758 H:1761
+15:01:58 [ir rx] 200 edges, 34 distinct widths, 54 long pulses
+15:01:58 [ir rx] capture 10: 200 edges
+15:01:58 [ir rx] decode: header 4315/4519 us, 48 bits, inverted, bytes DD 22 80 7F 00 FF
+15:01:58 [ir rx] raw (level:width us):
+15:01:58 [ir rx]  H:59879  L:4315   H:4519   L:423    H:1760   L:422    H:655    L:423  
+15:01:58 [ir rx]  H:1759   L:423    H:1759   L:423    H:1760   L:422    H:656    L:422  
+15:01:58 [ir rx]  H:1760   L:422    H:1759   L:423    H:656    L:423    H:1759   L:422  
+15:01:58 [ir rx]  H:657    L:421    H:656    L:422    H:656    L:422    H:1760   L:422  
+15:01:58 [ir rx]  H:656    L:422    H:656    L:422    H:656    L:429    H:649    L:421  
+15:01:58 [ir rx]  H:657    L:422    H:656    L:421    H:657    L:421    H:657    L:421  
+15:01:58 [ir rx]  H:657    L:421    H:1761   L:420    H:1762   L:422    H:1760   L:420  
+15:01:58 [ir rx]  H:1762   L:421    H:1762   L:420    H:1761   L:421    H:1762   L:421  
+15:01:58 [ir rx]  H:1761   L:419    H:659    L:420    H:658    L:420    H:658    L:419  
+15:01:58 [ir rx]  H:659    L:420    H:659    L:417    H:660    L:418    H:660    L:419  
+15:01:58 [ir rx]  H:658    L:419    H:660    L:419    H:1762   L:419    H:1764   L:418  
+15:01:58 [ir rx]  H:1764   L:419    H:1767   L:414    H:1764   L:418    H:1765   L:417  
+15:01:58 [ir rx]  H:1765   L:418    H:1764   L:417    H:5341   L:4308   H:4526   L:416  
+15:01:58 [ir rx]  H:1767   L:415    H:662    L:416    H:1766   L:416    H:1766   L:416  
+15:01:58 [ir rx]  H:1765   L:416    H:663    L:416    H:1766   L:415    H:1768   L:413  
+15:01:58 [ir rx]  H:664    L:413    H:665    L:413    H:665    L:413    H:665    L:413  
+15:01:58 [ir rx]  H:665    L:412    H:666    L:412    H:665    L:413    H:666    L:413  
+15:01:58 [ir rx]  H:665    L:419    H:1763   L:411    H:667    L:411    H:667    L:411  
+15:01:58 [ir rx]  H:666    L:412    H:667    L:409    H:674    L:405    H:1795   L:387  
+15:01:58 [ir rx]  H:691    L:387    H:669    L:410    H:690    L:387    H:692    L:385  
+15:01:58 [ir rx]  H:692    L:386    H:692    L:386    H:691    L:387    H:692    L:387  
+15:01:58 [ir rx]  H:691    L:386    H:692    L:387    H:691    L:386    H:691    L:387  
+15:01:58 [ir rx]  H:692    L:386    H:691    L:387    H:691    L:386    H:692    L:387  
+15:01:58 [ir rx]  H:1796   L:386    H:1795   L:387    H:1795   L:387    H:1795   L:388  
+15:01:58 [ir rx]  H:1795   L:386    H:1796   L:385    H:693    L:386    H:692    L:385  
+15:01:58 [ir rx] pulse width histogram (level:width us x count):
+15:01:58 [ir rx]   L:380    x 24
+15:01:58 [ir rx]   L:400    x 2
+15:01:58 [ir rx]   L:410    x 38
+15:01:58 [ir rx]   L:420    x 34
+15:01:58 [ir rx]   H:640    x 1
+15:01:58 [ir rx]   H:650    x 20
+15:01:58 [ir rx]   H:660    x 19
+15:01:58 [ir rx]   H:670    x 1
+15:01:58 [ir rx]   H:690    x 17
+15:01:58 [ir rx]   H:1750   x 4
+15:01:58 [ir rx]   H:1760   x 27
+15:01:58 [ir rx]   H:1790   x 7
+15:01:58 [ir rx]   L:4300   x 1
+15:01:58 [ir rx]   L:4310   x 1
+15:01:58 [ir rx]   H:4510   x 1
+15:01:58 [ir rx]   H:4520   x 1
+15:01:58 [ir rx]   H:5340   x 1
+15:01:58 [ir rx]   H:59870  x 1
+15:01:58 [ir rx] long pulses (>= 1500 us): H:59879 L:4315 H:4519 H:1760 H:1759 H:1759 H:1760 H:1760 H:1759 H:1759 H:1760 H:1761 H:1762 H:1760 H:1762 H:1762 H:1761 H:1762 H:1761 H:1762 H:1764 H:1764 H:1767 H:1764 H:1765 H:1765 H:1764 H:5341 L:4308 H:4526 H:1767 H:1766 H:1766 H:1765 H:1766 H:1768 H:1763 H:1795 H:1796 H:1795 H:1795 H:1795 H:1795 H:1796
+15:01:58 [ir rx] 200 edges, 18 distinct widths, 44 long pulses
+15:02:00 frame from remote, type 1, channel 5
+15:02:01 radio channel 5 (want 5), remote paired, last frame from remote 0ms ago, ir interrupts 2000, ir pulses 2000, ir glitches 0, ir dropped 0, ir level HIGH
+15:02:03 frame from remote, type 1, channel 5
+15:02:06 radio channel 5 (want 5), remote paired, last frame from remote 0ms ago, ir interrupts 2000, ir pulses 2000, ir glitches 0, ir dropped 0, ir level HIGH
+15:02:06 frame from remote, type 1, channel 5
+15:02:07 [ir rx] capture 11: 200 edges
+15:02:07 [ir rx] decode: header 4341/4493 us, 48 bits, inverted, bytes 4D B2 DE 21 07 F8
+15:02:07 [ir rx] raw (level:width us):
+15:02:07 [ir rx]  H:8604032  L:4341   H:4493   L:452    H:1727   L:453    H:628    L:450  
+15:02:07 [ir rx]  H:1730   L:475    H:1707   L:452    H:653    L:449    H:628    L:425  
+15:02:07 [ir rx]  H:1731   L:449    H:657    L:447    H:629    L:423    H:1733   L:447  
+15:02:07 [ir rx]  H:658    L:420    H:658    L:400    H:1757   L:428    H:1755   L:426  
+15:02:07 [ir rx]  H:677    L:402    H:1754   L:431    H:673    L:406    H:1752   L:454  
+15:02:07 [ir rx]  H:1728   L:480    H:1701   L:485    H:1698   L:510    H:592    L:489  
+15:02:07 [ir rx]  H:1668   L:515    H:1668   L:515    H:1667   L:514    H:588    L:491  
+15:02:07 [ir rx]  H:587    L:491    H:587    L:490    H:588    L:491    H:1665   L:516  
+15:02:07 [ir rx]  H:587    L:491    H:586    L:492    H:1666   L:516    H:1666   L:516  
+15:02:07 [ir rx]  H:1666   L:515    H:587    L:490    H:588    L:489    H:589    L:486  
+15:02:07 [ir rx]  H:572    L:480    H:618    L:456    H:602    L:474    H:602    L:474  
+15:02:07 [ir rx]  H:604    L:472    H:1708   L:448    H:1733   L:451    H:1733   L:450  
+15:02:07 [ir rx]  H:1732   L:452    H:1730   L:450    H:5309   L:4335   H:4519   L:424  
+15:02:07 [ir rx]  H:1757   L:426    H:653    L:423    H:1759   L:423    H:1759   L:423  
+15:02:07 [ir rx]  H:659    L:419    H:656    L:422    H:1761   L:421    H:657    L:420  
+15:02:07 [ir rx]  H:658    L:420    H:1762   L:420    H:659    L:419    H:658    L:419  
+15:02:07 [ir rx]  H:1764   L:417    H:1766   L:417    H:660    L:418    H:1766   L:415  
+15:02:07 [ir rx]  H:662    L:416    H:1767   L:413    H:1769   L:412    H:1772   L:409  
+15:02:07 [ir rx]  H:1772   L:410    H:668    L:411    H:1771   L:412    H:1771   L:410  
+15:02:07 [ir rx]  H:1773   L:409    H:668    L:410    H:667    L:410    H:691    L:387  
+15:02:07 [ir rx]  H:691    L:387    H:1795   L:387    H:691    L:387    H:691    L:387  
+15:02:07 [ir rx]  H:1795   L:387    H:1795   L:387    H:1796   L:386    H:691    L:386  
+15:02:07 [ir rx]  H:693    L:386    H:691    L:387    H:692    L:386    H:691    L:386  
+15:02:07 [ir rx]  H:692    L:386    H:692    L:387    H:691    L:386    H:1796   L:386  
+15:02:07 [ir rx]  H:1796   L:387    H:1795   L:387    H:1795   L:386    H:1797   L:387  
+15:02:07 [ir rx] pulse width histogram (level:width us x count):
+15:02:07 [ir rx]   L:380    x 21
+15:02:07 [ir rx]   L:400    x 5
+15:02:07 [ir rx]   L:410    x 16
+15:02:07 [ir rx]   L:420    x 15
+15:02:07 [ir rx]   L:430    x 1
+15:02:07 [ir rx]   L:440    x 5
+15:02:07 [ir rx]   L:450    x 10
+15:02:07 [ir rx]   L:470    x 4
+15:02:07 [ir rx]   L:480    x 6
+15:02:07 [ir rx]   L:490    x 7
+15:02:07 [ir rx]   L:510    x 8
+15:02:07 [ir rx]   H:570    x 1
+15:02:07 [ir rx]   H:580    x 9
+15:02:07 [ir rx]   H:590    x 1
+15:02:07 [ir rx]   H:600    x 3
+15:02:07 [ir rx]   H:610    x 1
+15:02:07 [ir rx]   H:620    x 3
+15:02:07 [ir rx]   H:650    x 11
+15:02:07 [ir rx]   H:660    x 5
+15:02:07 [ir rx]   H:670    x 2
+15:02:07 [ir rx]   H:690    x 12
+15:02:07 [ir rx]   H:1660   x 7
+15:02:07 [ir rx]   H:1690   x 1
+15:02:07 [ir rx]   H:1700   x 3
+15:02:07 [ir rx]   H:1720   x 2
+15:02:07 [ir rx]   H:1730   x 7
+15:02:07 [ir rx]   H:1750   x 7
+15:02:07 [ir rx]   H:1760   x 7
+15:02:07 [ir rx]   H:1770   x 5
+15:02:07 [ir rx]   H:1790   x 9
+15:02:07 [ir rx]   L:4330   x 1
+15:02:07 [ir rx]   L:4340   x 1
+15:02:07 [ir rx]   H:4490   x 1
+15:02:07 [ir rx]   H:4510   x 1
+15:02:07 [ir rx]   H:5300   x 1
+15:02:07 [ir rx]   H:8604030 x 1
+15:02:07 [ir rx] long pulses (>= 1500 us): H:8604032 L:4341 H:4493 H:1727 H:1730 H:1707 H:1731 H:1733 H:1757 H:1755 H:1754 H:1752 H:1728 H:1701 H:1698 H:1668 H:1668 H:1667 H:1665 H:1666 H:1666 H:1666 H:1708 H:1733 H:1733 H:1732 H:1730 H:5309 L:4335 H:4519 H:1757 H:1759 H:1759 H:1761 H:1762 H:1764 H:1766 H:1766 H:1767 H:1769 H:1772 H:1772 H:1771 H:1771 H:1773 H:1795 H:1795 H:1795 H:1796 H:1796 H:1796 H:1795 H:1795 H:1797
+15:02:07 [ir rx] 200 edges, 36 distinct widths, 54 long pulses
+15:02:09 frame from remote, type 1, channel 5

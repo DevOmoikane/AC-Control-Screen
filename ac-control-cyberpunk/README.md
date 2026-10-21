@@ -1,4 +1,4 @@
-# AETHER / AC controller — EEZ Studio + LVGL 9.4
+# ISRA / AC controller — EEZ Studio + LVGL 9.4
 
 This folder contains a **modified version of the uploaded `AC_Control.eez-project`**, preserving its LVGL 9.4.0 target and temperature-arc concept. The result is a 320 × 240 landscape interface for the common ESP32-2432S028/CYD touch display.
 

@@ -85,7 +85,7 @@ void create_screen_main() {
             lv_obj_set_style_text_align(obj, LV_TEXT_ALIGN_LEFT, LV_PART_MAIN | LV_STATE_DEFAULT);
             lv_obj_set_style_bg_opa(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
             lv_obj_set_style_border_width(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
-            lv_label_set_text(obj, "AETHER");
+            lv_label_set_text(obj, "ISRA");
         }
         {
             // brand_subline_main
@@ -882,7 +882,7 @@ void create_screen_extras() {
             lv_obj_set_style_text_align(obj, LV_TEXT_ALIGN_LEFT, LV_PART_MAIN | LV_STATE_DEFAULT);
             lv_obj_set_style_bg_opa(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
             lv_obj_set_style_border_width(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
-            lv_label_set_text(obj, "AETHER");
+            lv_label_set_text(obj, "ISRA");
         }
         {
             // brand_subline_extras
@@ -1569,7 +1569,7 @@ void create_screen_network() {
             lv_obj_set_style_text_align(obj, LV_TEXT_ALIGN_LEFT, LV_PART_MAIN | LV_STATE_DEFAULT);
             lv_obj_set_style_bg_opa(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
             lv_obj_set_style_border_width(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
-            lv_label_set_text(obj, "AETHER");
+            lv_label_set_text(obj, "ISRA");
         }
         {
             // brand_subline_network
