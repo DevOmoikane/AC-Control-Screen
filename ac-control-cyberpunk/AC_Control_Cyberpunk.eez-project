@@ -714,7 +714,7 @@
                     "definition": {
                       "MAIN": {
                         "DEFAULT": {
-                          "text_color": "#14E6F4",
+                          "text_color": "#1B0F02",
                           "text_font": "MONTSERRAT_12",
                           "text_align": "CENTER",
                           "bg_opa": 0,
@@ -749,9 +749,9 @@
                 "definition": {
                   "MAIN": {
                     "DEFAULT": {
-                      "bg_color": "#14243B",
+                      "bg_color": "#FF8A3D",
                       "bg_opa": 255,
-                      "border_color": "#213751",
+                      "border_color": "#C25E1A",
                       "border_width": 1,
                       "radius": 7,
                       "pad_all": 0,
@@ -2858,7 +2858,7 @@
                     "definition": {
                       "MAIN": {
                         "DEFAULT": {
-                          "text_color": "#14E6F4",
+                          "text_color": "#1B0F02",
                           "text_font": "MONTSERRAT_12",
                           "text_align": "CENTER",
                           "bg_opa": 0,
@@ -2893,9 +2893,9 @@
                 "definition": {
                   "MAIN": {
                     "DEFAULT": {
-                      "bg_color": "#14243B",
+                      "bg_color": "#FF8A3D",
                       "bg_opa": 255,
-                      "border_color": "#213751",
+                      "border_color": "#C25E1A",
                       "border_width": 1,
                       "radius": 7,
                       "pad_all": 0,
@@ -4726,7 +4726,7 @@
                     "definition": {
                       "MAIN": {
                         "DEFAULT": {
-                          "text_color": "#14E6F4",
+                          "text_color": "#1B0F02",
                           "text_font": "MONTSERRAT_12",
                           "text_align": "CENTER",
                           "bg_opa": 0,
@@ -4761,9 +4761,9 @@
                 "definition": {
                   "MAIN": {
                     "DEFAULT": {
-                      "bg_color": "#14243B",
+                      "bg_color": "#FF8A3D",
                       "bg_opa": 255,
-                      "border_color": "#213751",
+                      "border_color": "#C25E1A",
                       "border_width": 1,
                       "radius": 7,
                       "pad_all": 0,
