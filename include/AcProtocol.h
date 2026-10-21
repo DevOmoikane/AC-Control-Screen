@@ -8,7 +8,7 @@ constexpr uint8_t VERSION = 1;
 enum class Type : uint8_t { Hello = 1, Command = 2, Ack = 3 };
 enum class Role : uint8_t { Remote = 1, IrNode = 2 };
 enum class Action : uint8_t { SetState = 1, LedToggle = 2, TurboToggle = 3 };
-enum class Mode : uint8_t { Cool = 0, Auto = 1, Heat = 2 };
+enum class Mode : uint8_t { Cool = 0, Auto = 1, Heat = 2, Dry = 3, Fan = 4 };
 enum class Fan : uint8_t { Auto = 0, Low = 1, Medium = 2, High = 3 };
 enum class Result : uint8_t { Ok = 0, InvalidCommand = 1, IrError = 2 };
 
@@ -40,7 +40,7 @@ inline bool validFrame(const Frame& f) {
          f.type >= 1 && f.type <= 3 && f.role >= 1 && f.role <= 2;
 }
 inline bool validState(const State& s) {
-  return s.power <= 1 && s.mode <= static_cast<uint8_t>(Mode::Heat) &&
+  return s.power <= 1 && s.mode <= static_cast<uint8_t>(Mode::Fan) &&
          s.fan <= static_cast<uint8_t>(Fan::High) &&
          s.tempC >= 17 && s.tempC <= 30;
 }

@@ -13,7 +13,7 @@ The intended AC remote is **Midea RG57A7/BGEF**, matching an earlier project usi
 
 - Automatically discovers the peer via ESP-NOW (no MAC editing needed).
 - No router, cloud, server, or Internet required by default.
-- Change power, 17–30 °C, Cool/Auto/Heat, Auto/Low/Medium/High fan; LED and Turbo toggle.
+- Change power, 17–30 °C, Auto/Cool/Dry/Fan/Heat, Auto/Low/Medium/High fan; LED and Turbo toggle.
 - Touch UI built with **EEZ Studio + LVGL 9.4**: three screens (climate arc, extras, network), regeneratable from the `.eez-project` without hand-written drawing code.
 - Infrared transmitter uses the ESP32-C3's two RMT TX channels to drive two different output GPIOs with matching carrier timing.
 - User input queues commands; adjacent state changes coalesce; application-level ACK, timeout and retry with duplicate sequence suppression.
@@ -398,17 +398,17 @@ The three screens share a header and a bottom navigation bar. All of them are
 real LVGL widgets, so they scroll, animate and react to touch natively.
 
 Modes cycle Auto → Cool → Dry → Fan → Heat. Fan cycles Auto → Low → Medium →
-High, except Auto mode forces automatic fan. You can change preset controls
+High, except Auto and Dry force automatic fan. You can change preset controls
 while off; pressing POWER ON applies the selected setpoints. The LED and Turbo
 actions are **toggles**, not known on/off values, so the tile shows the last
 locally requested state and may drift from the AC.
 
-**Protocol limits.** The ESP-NOW wire format only carries power, mode (Cool /
-Auto / Heat), fan and temperature. Dry and Fan-only modes, and the swing, eco
-and sleep tiles, are therefore **rejected by the firmware** with a note on the
-Network screen; the tile still flips locally. The LED and Turbo tiles map onto
-the two dedicated toggle actions. Extending this means changing
-`include/AcProtocol.h` and the IR node codec in tandem.
+**Protocol limits.** The ESP-NOW wire format carries power, mode (Cool / Auto /
+Heat / Dry / Fan), fan and temperature. The swing, eco and sleep tiles are
+therefore **rejected by the firmware** with a note on the Network screen; the
+tile still flips locally. The LED and Turbo tiles map onto the two dedicated
+toggle actions. Extending the modes means changing `include/AcProtocol.h` and
+the IR node codec in tandem.
 
 The status `IR command sent` means the IR node's hardware transmission
 completed, **not** that the AC confirmed reception.
@@ -456,6 +456,11 @@ The custom codec currently implements:
 - ON state packet: `4D B2 <fan> <~fan> <mode|temperature> <checksum>`, LSB first.
 - Captured **OFF** packet, regardless of displayed setpoint: `4D B2 DE 21 07 F8`.
 - Known-good captured **ON Cool/High/21 °C** example: `4D B2 FC 03 06 F9`.
+- Captured **ON Dry/Auto/17 °C** example: `4D B2 F8 07 20 DF`.
+- Captured **ON Fan/Auto/17 °C** example: `4D B2 FD 02 27 D8`.
+- Mode bits of byte 4: Cool `0x00`, Auto `0x10`, Dry `0x20`, Heat `0x30`.
+  Fan-only mode shares the `0x20` bits and carries the "do not care" nibble
+  `0x07` instead of a setpoint, which is why fan-only mode has no temperature.
 - Nonlinear temperature LUT for 17–30 °C, special Auto fan value `F8`, checksum `(0xFD - sum(first 5 bytes)) & 0xFF`.
 - LED Toggle `AD 52 AF 50 A5 <checksum>` and Turbo Toggle `AD 52 AF 50 45 <checksum>`.
 - 38 kHz carrier; 4345/4490 µs header; 450 µs marks; 630/1725 µs zero/one spaces; frame repeated twice.
@@ -479,10 +484,16 @@ What the recordings of the original remote confirmed:
   labels ran ahead of the remote. The seven points of the remote need a
   recording where the fan button is pressed once per capture, waiting for
   the display to settle.
+- Dry and fan-only mode are encoded from the recording of
+  `captures/remote-20261021-145952.txt`. Dry carries the setpoint and uses
+  the auto override fan byte `F8`; fan-only mode carries no setpoint and
+  keeps the fan byte of the chosen speed. Only 17 °C was recorded for both,
+  so a capture of each at another temperature would confirm the setpoint
+  encoding of dry and the fixed nibble of fan-only mode.
 
-**Dry, fan-only, swing, Follow Me, timers, and other undocumented functions
-are intentionally not claimed as working**. The fixed OFF packet is based on
-a prior captured frame, not an inferred formula.
+**Swing, Follow Me, timers, and other undocumented functions are intentionally
+not claimed as working**. The fixed OFF packet is based on a prior captured
+frame, not an inferred formula.
 
 ## Link details
 

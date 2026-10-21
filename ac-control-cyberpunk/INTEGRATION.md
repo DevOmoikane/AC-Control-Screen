@@ -67,21 +67,23 @@ ac_ui_apply_remote_state(&remote);   // e.g. after an MQTT/HA change
 
 ## Translation and the protocol limits
 
-`include/AcProtocol.h` supports only **Cool=0, Auto=1, Heat=2** and the wire
-`ac::State` only includes **power, mode, fan, tempC**.
+`include/AcProtocol.h` supports **Cool=0, Auto=1, Heat=2, Dry=3, Fan=4** and
+the wire `ac::State` only includes **power, mode, fan, tempC**.
 
 - **Mode** is translated explicitly; the EEZ numbering is never cast to
-  `ac::Mode`. `DRY` and `FAN` have no representation, so they are rejected and
-  reported on the Network screen.
+  `ac::Mode`. `DRY` and `FAN` are supported, so all five modes of the mode
+  card reach the AC.
 - **Fan** happens to line up (Auto/Low/Med/High = 0..3) and is copied
-  directly. Auto mode forces the automatic fan, as before.
+  directly. Auto and Dry modes force the automatic fan, because the AC picks
+  the speed itself in both of them.
 - **Swing, eco and sleep** are not in the wire format and are rejected.
 - **Turbo and the display LED** map onto the two dedicated toggle actions
   (`ac::Action::TurboToggle`, `ac::Action::LedToggle`). They are *toggles*, so
   the tiles show the last locally requested state and can drift from the AC.
 
-Supporting Dry/Fan/swing/eco/sleep properly means changing
-`include/AcProtocol.h` **and** the IR node codec in tandem, not just the UI.
+Adding a mode means changing `include/AcProtocol.h` **and** the IR node codec
+in tandem, not just the UI. Swing/eco/sleep still need the wire format to
+grow first.
 
 ## Threading
 

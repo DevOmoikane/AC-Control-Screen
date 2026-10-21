@@ -222,6 +222,8 @@ String modeName(uint8_t value) {
     case ac::Mode::Cool: return "cool";
     case ac::Mode::Auto: return "auto";
     case ac::Mode::Heat: return "heat";
+    case ac::Mode::Dry: return "dry";
+    case ac::Mode::Fan: return "fan";
     default: return "cool";
   }
 }
@@ -264,6 +266,9 @@ void publishApplied() {
 uint8_t acModeToUi(uint8_t acMode) {
   switch (static_cast<ac::Mode>(acMode)) {
     case ac::Mode::Auto: return 0;  // AUTO
+    case ac::Mode::Cool: return 1;  // COOL
+    case ac::Mode::Dry: return 2;   // DRY
+    case ac::Mode::Fan: return 3;   // FAN
     case ac::Mode::Heat: return 4;  // HEAT
     default: return 1;              // COOL
   }
@@ -289,12 +294,18 @@ void onMqtt(char* rawTopic, byte* payload, unsigned int length) {
   bool changed = false;
   if (t == topic("set/mode")) {
     if (v == "off") { desired.power = 0; changed = true; }
-    else if (v == "cool" || v == "heat" || v == "auto") {
+    else if (v == "cool" || v == "heat" || v == "auto" || v == "dry" || v == "fan") {
       desired.power = 1;
       desired.mode = v == "cool" ? (uint8_t)ac::Mode::Cool :
-                     v == "heat" ? (uint8_t)ac::Mode::Heat : (uint8_t)ac::Mode::Auto;
-      if (desired.mode == (uint8_t)ac::Mode::Auto)
+                     v == "heat" ? (uint8_t)ac::Mode::Heat :
+                     v == "dry"  ? (uint8_t)ac::Mode::Dry :
+                     v == "fan"  ? (uint8_t)ac::Mode::Fan :
+                                  (uint8_t)ac::Mode::Auto;
+      if (desired.mode == (uint8_t)ac::Mode::Auto ||
+          desired.mode == (uint8_t)ac::Mode::Dry) {
+        // Both modes let the AC pick the fan speed.
         desired.fan = (uint8_t)ac::Fan::Auto;
+      }
       changed = true;
     }
   } else if (t == topic("set/temperature")) {
@@ -304,7 +315,8 @@ void onMqtt(char* rawTopic, byte* payload, unsigned int length) {
       changed = desired.power != 0;
     }
   } else if (t == topic("set/fan")) {
-    if (desired.mode != (uint8_t)ac::Mode::Auto) {
+    if (desired.mode != (uint8_t)ac::Mode::Auto &&
+        desired.mode != (uint8_t)ac::Mode::Dry) {
       if (v == "auto") desired.fan = (uint8_t)ac::Fan::Auto;
       else if (v == "low") desired.fan = (uint8_t)ac::Fan::Low;
       else if (v == "medium") desired.fan = (uint8_t)ac::Fan::Medium;
@@ -332,7 +344,7 @@ void publishDiscovery() {
   json += "\"temperature_command_topic\":\"~/set/temperature\",\"temperature_state_topic\":\"~/state/temperature\",";
   json += "\"fan_command_topic\":\"~/set/fan\",\"fan_state_topic\":\"~/state/fan\",";
   json += "\"availability_topic\":\"~/availability\",\"payload_available\":\"online\",\"payload_unavailable\":\"offline\",";
-  json += "\"modes\":[\"off\",\"auto\",\"cool\",\"heat\"],";
+  json += "\"modes\":[\"off\",\"auto\",\"cool\",\"dry\",\"fan\",\"heat\"],";
   json += "\"fan_modes\":[\"auto\",\"low\",\"medium\",\"high\"],";
   json += "\"min_temp\":17,\"max_temp\":30,\"temp_step\":1,\"temperature_unit\":\"C\"}";
   mqtt.publish(discoveryTopic.c_str(), json.c_str(), true);
@@ -695,16 +707,18 @@ extern "C" void ac_ui_send_state(const ac_ui_state_t* s) {
   bool changed = false;
   const char* note = nullptr;
 
-  // Mode: the wire protocol only carries Cool / Auto / Heat.
+  // Mode: the UI numbers the modes its own way; the wire protocol uses a
+  // different one. Translate explicitly, never cast.
   uint8_t mode = static_cast<uint8_t>(ac::Mode::Cool);
   bool modeOk = true;
   switch (s->mode) {
     case 0: mode = static_cast<uint8_t>(ac::Mode::Auto); break;
     case 1: mode = static_cast<uint8_t>(ac::Mode::Cool); break;
+    case 2: mode = static_cast<uint8_t>(ac::Mode::Dry); break;
+    case 3: mode = static_cast<uint8_t>(ac::Mode::Fan); break;
     case 4: mode = static_cast<uint8_t>(ac::Mode::Heat); break;
     default:
       modeOk = false;
-      note = "DRY and FAN modes are not in the IR protocol";
       break;
   }
   if (modeOk && desired.mode != mode) {
@@ -714,9 +728,13 @@ extern "C" void ac_ui_send_state(const ac_ui_state_t* s) {
 
   // Fan numbering happens to match (Auto/Low/Med/High = 0..3).
   uint8_t fan = s->fan > 3 ? static_cast<uint8_t>(ac::Fan::Auto) : s->fan;
-  if (desired.mode == static_cast<uint8_t>(ac::Mode::Auto)) {
+  if (desired.mode == static_cast<uint8_t>(ac::Mode::Auto) ||
+      desired.mode == static_cast<uint8_t>(ac::Mode::Dry)) {
+    // Both modes let the AC pick the fan speed, so the card shows Auto.
     fan = static_cast<uint8_t>(ac::Fan::Auto);
   }
+  // The mode does not allow the speed the card asked for.
+  const bool fanForced = fan != s->fan;
   if (desired.fan != fan) {
     desired.fan = fan;
     changed = true;
@@ -765,6 +783,12 @@ extern "C" void ac_ui_send_state(const ac_ui_state_t* s) {
     real.swing = 0;
     real.eco = 0;
     real.sleep = 0;
+    ac_ui_apply_remote_state(&real);
+  } else if (fanForced) {
+    // The card asked for a speed the mode does not allow, so it goes back
+    // to Auto. Otherwise the display would disagree with the AC.
+    ac_ui_state_t real = *ac_ui_current_state();
+    real.fan = desired.fan;
     ac_ui_apply_remote_state(&real);
   }
 }

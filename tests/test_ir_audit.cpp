@@ -262,6 +262,46 @@ int main() {
     check("no error is reported", capture.error.empty());
   }
 
+  // 15. Dry and fan, as the original remote sends them at 17 C.
+  {
+    const uint8_t dry[6] = {0x4D, 0xB2, 0xF8, 0x07, 0x20, 0xDF};
+    const FrameInfo dryInfo = describeFrame(dry);
+    check("the dry frame is a state frame", dryInfo.kind == FrameKind::State);
+    check("the dry frame is Dry", dryInfo.modeName == "Dry");
+    check("the dry frame uses the auto override fan", dryInfo.fanName == "Auto override");
+    check("the dry frame carries 17 C", dryInfo.tempC == 17 && dryInfo.tempKnown);
+    check("the dry frame has a valid checksum", dryInfo.checksumOk);
+
+    const uint8_t fan[6] = {0x4D, 0xB2, 0xFD, 0x02, 0x27, 0xD8};
+    const FrameInfo fanInfo = describeFrame(fan);
+    check("the fan frame is a state frame", fanInfo.kind == FrameKind::State);
+    check("the fan frame is Fan", fanInfo.modeName == "Fan");
+    check("the fan frame uses the auto fan", fanInfo.fanName == "Auto");
+    check("the fan frame has no setpoint", !fanInfo.tempKnown);
+    check("the fan frame has a valid checksum", fanInfo.checksumOk);
+  }
+
+  // 16. The dry and fan labels expect the frames the remote sends.
+  {
+    const Expectation dry = expectationForLabel("dry_auto_17");
+    check("the dry label is understood", dry.kind == ExpectKind::State);
+    check("the dry mode is taken from the label", dry.state.mode == static_cast<uint8_t>(ac::Mode::Dry));
+    check("the codec can encode dry", dry.codecCanEncode);
+    uint8_t expected[FRAME_BYTES] = {0};
+    check("the codec produces the captured dry frame", expectedBytes(dry, expected));
+    const uint8_t knownDry[6] = {0x4D, 0xB2, 0xF8, 0x07, 0x20, 0xDF};
+    check("the dry frame is the captured one", memcmp(expected, knownDry, 6) == 0);
+
+    const Expectation fan = expectationForLabel("fan_auto_17");
+    check("the fan label is understood", fan.kind == ExpectKind::State);
+    check("the fan mode is taken from the label", fan.state.mode == static_cast<uint8_t>(ac::Mode::Fan));
+    check("the codec can encode fan", fan.codecCanEncode);
+    uint8_t fanExpected[FRAME_BYTES] = {0};
+    check("the codec produces the captured fan frame", expectedBytes(fan, fanExpected));
+    const uint8_t knownFan[6] = {0x4D, 0xB2, 0xFD, 0x02, 0x27, 0xD8};
+    check("the fan frame is the captured one", memcmp(fanExpected, knownFan, 6) == 0);
+  }
+
   printf("\n%s (%d failure%s)\n", failures ? "FAILED" : "ALL PASS", failures,
          failures == 1 ? "" : "s");
   return failures ? 1 : 0;

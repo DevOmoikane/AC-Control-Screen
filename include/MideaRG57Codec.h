@@ -27,6 +27,18 @@ constexpr uint8_t TEMP_NIBBLE[14] = {
     0x0, 0x8, 0xC, 0x4, 0x6, 0xE, 0xA,
     0x2, 0x3, 0xB, 0x9, 0x1, 0x5, 0xD}; // 17..30 C
 
+// The mode bits of byte 4. Dry shares its high nibble with fan-only mode;
+// the two are told apart by the low nibble, see FAN_MODE_BYTE.
+constexpr uint8_t MODE_HIGH_COOL = 0x00;
+constexpr uint8_t MODE_HIGH_AUTO = 0x10;
+constexpr uint8_t MODE_HIGH_DRY = 0x20;
+constexpr uint8_t MODE_HIGH_HEAT = 0x30;
+
+// Fan-only mode carries no setpoint: the remote sends the mode bits with the
+// low nibble 0x07, the same "do not care" nibble the OFF packet uses. The
+// nibble is not in TEMP_NIBBLE, so it cannot be read as a temperature.
+constexpr uint8_t FAN_MODE_BYTE = MODE_HIGH_DRY | 0x07;
+
 inline uint8_t checksum(const uint8_t* data) {
   uint16_t sum = 0;
   for (int i = 0; i < 5; ++i) sum += data[i];
@@ -43,13 +55,16 @@ inline bool encodeState(const ac::State& s, uint8_t out[6]) {
   }
   uint8_t modeHigh;
   switch (static_cast<ac::Mode>(s.mode)) {
-    case ac::Mode::Cool: modeHigh = 0x00; break;
-    case ac::Mode::Auto: modeHigh = 0x10; break;
-    case ac::Mode::Heat: modeHigh = 0x30; break;
+    case ac::Mode::Cool: modeHigh = MODE_HIGH_COOL; break;
+    case ac::Mode::Auto: modeHigh = MODE_HIGH_AUTO; break;
+    case ac::Mode::Heat: modeHigh = MODE_HIGH_HEAT; break;
+    case ac::Mode::Dry: modeHigh = MODE_HIGH_DRY; break;
+    case ac::Mode::Fan: modeHigh = MODE_HIGH_DRY; break;
     default: return false;
   }
   uint8_t fanByte;
-  if (s.mode == static_cast<uint8_t>(ac::Mode::Auto)) {
+  if (s.mode == static_cast<uint8_t>(ac::Mode::Auto) ||
+      s.mode == static_cast<uint8_t>(ac::Mode::Dry)) {
     fanByte = 0xF8; // Auto-mode override is mandatory
   } else {
     switch (static_cast<ac::Fan>(s.fan)) {
@@ -64,7 +79,11 @@ inline bool encodeState(const ac::State& s, uint8_t out[6]) {
   out[1] = 0xB2;
   out[2] = fanByte;
   out[3] = static_cast<uint8_t>(~fanByte);
-  out[4] = static_cast<uint8_t>(modeHigh | TEMP_NIBBLE[s.tempC - 17]);
+  if (s.mode == static_cast<uint8_t>(ac::Mode::Fan)) {
+    out[4] = FAN_MODE_BYTE; // no setpoint in fan-only mode
+  } else {
+    out[4] = static_cast<uint8_t>(modeHigh | TEMP_NIBBLE[s.tempC - 17]);
+  }
   out[5] = checksum(out);
   return true;
 }

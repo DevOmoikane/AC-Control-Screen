@@ -184,6 +184,11 @@ inline std::string modeNameOf(uint8_t modeTempByte) {
   switch (modeTempByte & 0xF0) {
     case 0x00: return "Cool";
     case 0x10: return "Auto";
+    case 0x20:
+      // Dry and fan-only mode share the mode bits. The fan frame carries
+      // the "do not care" nibble instead of a setpoint, so it is told apart
+      // by the low nibble.
+      return (modeTempByte & 0x0F) == 0x07 ? "Fan" : "Dry";
     case 0x30: return "Heat";
     default: return "unknown";
   }
@@ -238,6 +243,8 @@ inline bool modeFromName(const std::string& name, uint8_t& out) {
   if (name == "cool") { out = static_cast<uint8_t>(ac::Mode::Cool); return true; }
   if (name == "auto") { out = static_cast<uint8_t>(ac::Mode::Auto); return true; }
   if (name == "heat") { out = static_cast<uint8_t>(ac::Mode::Heat); return true; }
+  if (name == "dry") { out = static_cast<uint8_t>(ac::Mode::Dry); return true; }
+  if (name == "fan") { out = static_cast<uint8_t>(ac::Mode::Fan); return true; }
   return false;
 }
 
@@ -305,7 +312,7 @@ inline bool modeFromLabel(const std::string& name, std::string& canonical,
   }
   if (name == "dry" || name == "fan") {
     canonical = name;
-    codecKnows = false;
+    codecKnows = true;
     return true;
   }
   return false;
@@ -434,9 +441,11 @@ inline bool stateFromFrame(const FrameInfo& info, ac::State& out) {
   }
   out.power = 1;
   out.mode = mode == "cool"  ? static_cast<uint8_t>(ac::Mode::Cool)
-            : mode == "auto" ? static_cast<uint8_t>(ac::Mode::Auto)
-            : mode == "heat" ? static_cast<uint8_t>(ac::Mode::Heat)
-                             : static_cast<uint8_t>(ac::Mode::Cool);
+             : mode == "auto" ? static_cast<uint8_t>(ac::Mode::Auto)
+             : mode == "heat" ? static_cast<uint8_t>(ac::Mode::Heat)
+             : mode == "dry"  ? static_cast<uint8_t>(ac::Mode::Dry)
+             : mode == "fan"  ? static_cast<uint8_t>(ac::Mode::Fan)
+                              : static_cast<uint8_t>(ac::Mode::Cool);
   out.fan = fanValue;
   out.tempC = static_cast<uint8_t>(info.tempC);
   return true;

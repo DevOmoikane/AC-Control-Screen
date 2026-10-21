@@ -75,6 +75,6 @@ a widget that needs another font, enable it there too.
 ## What's complete / what remains
 
 - **Complete:** fully laid-out editable screens; buttons and arc have EEZ action handlers; native C state/getters/setters and firmware hook API included; the generated UI is compiled and linked into the CYD firmware.
-- **Not done:** flash-test validation on the physical boards, and IR protocol support for swing, eco and sleep (and for dry/fan-only modes).
+- **Not done:** flash-test validation on the physical boards, and IR protocol support for swing, eco and sleep.
 - **Important:** the `ac_ui_send_state`, `ac_ui_start_pairing` and `ac_ui_request_status` hooks have **weak no-op defaults** in `actions.c`; the strong implementations live in `src/cyd_remote.cpp`.
 
