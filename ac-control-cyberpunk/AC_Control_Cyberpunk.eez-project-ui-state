@@ -1,6 +1,6 @@
 {
   "navigation": {
-    "selectedUserPageObject": "[AC_Control_Cyberpunk.eez-project]:/userPages/2",
+    "selectedUserPageObject": "[AC_Control_Cyberpunk.eez-project]:/userPages/0",
     "selectedThemeObject": "[AC_Control_Cyberpunk.eez-project]:/themes/0",
     "subnavigationSelectedItems": {}
   },
@@ -23,7 +23,7 @@
           {
             "type": "border",
             "selected": 3,
-            "size": 240,
+            "size": 185.5,
             "location": "right",
             "children": [
               {
@@ -149,8 +149,7 @@
                       "enableClose": false,
                       "icon": "material:code"
                     }
-                  ],
-                  "active": true
+                  ]
                 },
                 {
                   "type": "tabset",
@@ -196,15 +195,16 @@
                 {
                   "type": "tab",
                   "id": "#b1b61536-4c3f-4551-afcf-f7c3417bf9b8",
-                  "name": "Network",
+                  "name": "Main",
                   "component": "editor",
                   "config": {
-                    "objectPath": "[AC_Control_Cyberpunk.eez-project]:/userPages/2",
+                    "objectPath": "[AC_Control_Cyberpunk.eez-project]:/userPages/0",
                     "permanent": false
                   },
                   "icon": "svg:page"
                 }
-              ]
+              ],
+              "active": true
             },
             {
               "type": "row",
@@ -1064,9 +1064,7 @@
           "15": {},
           "17": {},
           "18": {
-            "0": {
-              "$selected": true
-            }
+            "0": {}
           },
           "19": {}
         }
@@ -1076,7 +1074,7 @@
           "x": -296.1666666666667,
           "y": -229.96926406926403
         },
-        "scale": 2
+        "scale": 1.75
       },
       "timeline": {
         "isEditorActive": false,
@@ -1089,10 +1087,11 @@
       "selectionFront": {},
       "selectionBack": {
         "0": {
-          "4": {},
-          "5": {
+          "2": {
             "$selected": true
           },
+          "4": {},
+          "5": {},
           "7": {
             "0": {}
           },
@@ -1106,10 +1105,10 @@
       },
       "transform": {
         "translate": {
-          "x": -314,
-          "y": -230
+          "x": -270,
+          "y": -228
         },
-        "scale": 2
+        "scale": 1.75
       },
       "timeline": {
         "isEditorActive": false,
@@ -1123,9 +1122,10 @@
       "selectionBack": {
         "0": {
           "4": {
-            "0": {
-              "$selected": true
-            }
+            "0": {}
+          },
+          "6": {
+            "$selected": true
           },
           "7": {},
           "8": {},
@@ -1138,10 +1138,10 @@
       },
       "transform": {
         "translate": {
-          "x": -280,
-          "y": -240
+          "x": -246.5625,
+          "y": -229.9375
         },
-        "scale": 2
+        "scale": 1.75
       },
       "timeline": {
         "isEditorActive": false,
@@ -1169,6 +1169,6 @@
   ],
   "showInactiveFlowsInDebugger": true,
   "globalFlowZoom": true,
-  "flowZoom": 2,
+  "flowZoom": 1.75,
   "implementationLanguage": "C"
 }
