@@ -48,9 +48,7 @@ static void emit(void) { ac_ui_send_state(&s_ac); }
 /* EEZ Studio "native variable" getters/setters; generated screens.c uses these. */
 int32_t get_var_temperature(void) { return s_ac.temperature_c; }
 void set_var_temperature(int32_t v) { s_ac.temperature_c = clamp_temp((int16_t)v); }
-/* The AC does not report its state back, so the button does not show one.
- * It is a plain power button, like on the original remote. */
-const char *get_var_power_text(void) { return "Power"; }
+const char *get_var_power_text(void) { return s_ac.power ? "ON" : "OFF"; }
 const char *get_var_temp_text(void) {
     static char buf[16];
     snprintf(buf, sizeof(buf), "%d\302\260C", (int)s_ac.temperature_c);

@@ -14,6 +14,7 @@
       "displayWidth": 320,
       "displayHeight": 240,
       "displayBorderRadius": 0,
+      "darkTheme": true,
       "colorBpp": "16",
       "bitmapColorFormat": "BGR",
       "resourceFiles": [],
@@ -21,8 +22,7 @@
       "dimmedLinesOpacity": "20",
       "embedBitmaps": true,
       "embedFonts": true,
-      "cacheFonts": false,
-      "darkTheme": true
+      "cacheFonts": false
     },
     "build": {
       "objID": "72794a43-a0fc-13c2-7eb5-67dd952141a4",
@@ -524,7 +524,7 @@
               },
               "group": "",
               "groupIndex": 0,
-              "text": "ISRA",
+              "text": "ARKUS AC",
               "textType": "literal",
               "longMode": "CLIP",
               "recolor": false,
@@ -533,10 +533,10 @@
             {
               "objID": "b8b512f5-3ed3-4da4-a24e-1b81c8ae86e9",
               "type": "LVGLLabelWidget",
-              "left": 85,
-              "top": 7,
-              "width": 85,
-              "height": 18,
+              "left": 105,
+              "top": 15,
+              "width": 56,
+              "height": 10,
               "customInputs": [],
               "customOutputs": [],
               "style": {
@@ -570,7 +570,7 @@
                   "MAIN": {
                     "DEFAULT": {
                       "text_color": "#7891AC",
-                      "text_font": "MONTSERRAT_12",
+                      "text_font": "MONTSERRAT_10",
                       "text_align": "LEFT",
                       "bg_opa": 0,
                       "pad_all": 0,
@@ -2668,7 +2668,7 @@
               },
               "group": "",
               "groupIndex": 0,
-              "text": "ISRA",
+              "text": "ARKUS AC",
               "textType": "literal",
               "longMode": "CLIP",
               "recolor": false,
@@ -2677,10 +2677,10 @@
             {
               "objID": "5f734380-fbdd-41c2-a7d6-43e4e9d3ad2a",
               "type": "LVGLLabelWidget",
-              "left": 85,
-              "top": 7,
-              "width": 85,
-              "height": 18,
+              "left": 111,
+              "top": 16,
+              "width": 49,
+              "height": 10,
               "customInputs": [],
               "customOutputs": [],
               "style": {
@@ -2714,7 +2714,7 @@
                   "MAIN": {
                     "DEFAULT": {
                       "text_color": "#7891AC",
-                      "text_font": "MONTSERRAT_12",
+                      "text_font": "MONTSERRAT_10",
                       "text_align": "LEFT",
                       "bg_opa": 0,
                       "pad_all": 0,
@@ -4536,7 +4536,7 @@
               },
               "group": "",
               "groupIndex": 0,
-              "text": "ISRA",
+              "text": "ARKUS AC",
               "textType": "literal",
               "longMode": "CLIP",
               "recolor": false,
@@ -4545,10 +4545,10 @@
             {
               "objID": "c7bcd0c8-1105-403a-9539-7fa780f203cd",
               "type": "LVGLLabelWidget",
-              "left": 85,
-              "top": 7,
-              "width": 85,
-              "height": 18,
+              "left": 104,
+              "top": 15,
+              "width": 60,
+              "height": 10,
               "customInputs": [],
               "customOutputs": [],
               "style": {
@@ -4582,7 +4582,7 @@
                   "MAIN": {
                     "DEFAULT": {
                       "text_color": "#7891AC",
-                      "text_font": "MONTSERRAT_12",
+                      "text_font": "MONTSERRAT_10",
                       "text_align": "LEFT",
                       "bg_opa": 0,
                       "pad_all": 0,
@@ -4837,7 +4837,7 @@
               "type": "LVGLLabelWidget",
               "left": 14,
               "top": 63,
-              "width": 290,
+              "width": 186,
               "height": 17,
               "customInputs": [],
               "customOutputs": [],
@@ -4872,7 +4872,7 @@
                   "MAIN": {
                     "DEFAULT": {
                       "text_color": "#7891AC",
-                      "text_font": "MONTSERRAT_12",
+                      "text_font": "MONTSERRAT_8",
                       "text_align": "LEFT",
                       "bg_opa": 0,
                       "pad_all": 0,

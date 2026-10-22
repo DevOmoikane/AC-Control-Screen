@@ -3,10 +3,16 @@
  * Generated from the LVGL 9.4.0 lv_conf_template.h with these project
  * specific changes:
  *
- *   LV_FONT_MONTSERRAT_12 / _16 / _36  enabled
+ *   LV_FONT_MONTSERRAT_8 / _10 / _12 / _16 / _36  enabled
  *       The EEZ project (AC_Control_Cyberpunk.eez-project) references
- *       MONTSERRAT_12, MONTSERRAT_14, MONTSERRAT_16 and MONTSERRAT_36.
- *       Montserrat 14 is already the LVGL default and stays enabled.
+ *       MONTSERRAT_8, MONTSERRAT_10, MONTSERRAT_12, MONTSERRAT_14,
+ *       MONTSERRAT_16 and MONTSERRAT_36. Montserrat 14 is already the LVGL
+ *       default and stays enabled.
+ *       Every size the generated UI names has to be enabled here, otherwise
+ *       the generated code fails to compile with
+ *       "'lv_font_montserrat_<size>' undeclared". The EEZ font table in
+ *       src/ui/screens.c is guarded by these macros, so the sizes that are
+ *       only listed there do not need them.
  *   LV_USE_STDLIB_MALLOC / _STRING / _SPRINTF  switched to LV_STDLIB_CLIB
  *       LVGL's built-in allocator keeps a 64 kB pool in .bss, which does not
  *       fit in the ESP32's dram0_0_seg region. The C library heap is used
@@ -20,6 +26,10 @@
  *       LV_USE_MENU are disabled as well, because those two widgets hard
  *       require LV_USE_FLEX (lv_list.h / lv_menu.h emit #error otherwise)
  *       and the UI uses neither.
+ *   LV_USE_IMAGE  enabled
+ *       The splash screen is a bitmap drawn by the firmware, not by the EEZ
+ *       generated UI, so it needs the image widget. The binary decoder that
+ *       goes with it (lv_bin_decoder) is always compiled in by LVGL.
  *
  * Everything else is left at the LVGL 9.4.0 defaults.
  */
@@ -629,8 +639,8 @@
 
 /* Montserrat fonts with ASCII range and some symbols using bpp = 4
  * https://fonts.google.com/specimen/Montserrat */
-#define LV_FONT_MONTSERRAT_8  0
-#define LV_FONT_MONTSERRAT_10 0
+#define LV_FONT_MONTSERRAT_8  1
+#define LV_FONT_MONTSERRAT_10 1
 #define LV_FONT_MONTSERRAT_12 1
 #define LV_FONT_MONTSERRAT_14 1
 #define LV_FONT_MONTSERRAT_16 1
@@ -782,7 +792,7 @@
 
 #define LV_USE_DROPDOWN   0   /**< Requires: lv_label */
 
-#define LV_USE_IMAGE      0   /**< Requires: lv_label */
+#define LV_USE_IMAGE      1   /**< Requires: lv_label */
 
 #define LV_USE_IMAGEBUTTON     0
 

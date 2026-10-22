@@ -3,6 +3,7 @@
 .DS_Store
 *.bin
 *.elf
+__pycache__/
 
 # EEZ Studio AppImage extraction (see ac-control-cyberpunk/build-eez.sh)
 ac-control-cyberpunk/squashfs-root/

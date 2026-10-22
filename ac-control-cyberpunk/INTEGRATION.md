@@ -13,12 +13,19 @@ ESP-NOW/IR stack. This file documents how the two halves fit together.
 | LVGL configuration | `include/lv_conf.h` |
 | Firmware | `src/cyd_remote.cpp` |
 | Bridge header | `ac-control-cyberpunk/ac_ui_bridge.h` → `src/ui/ac_ui_bridge.h` |
+| Splash artwork | `ac-control-cyberpunk/splash.png` → `src/splash/splash_img.c` |
 
 Regenerate the C from the project with EEZ Studio (Build), or headlessly:
 
 ```sh
 ./ac-control-cyberpunk/build-eez.sh /path/to/eez-studio
 ```
+
+The splash screen is **not** part of this project. It is an overlay the
+firmware puts on LVGL's top layer, so it can cover any of the three screens
+and swallow the touch that dismisses it. Its bitmap is generated from
+`splash.png` by `tools/png_to_lvgl.py` and lives in `src/splash/`, outside the
+EEZ build destination.
 
 ## The runtime shape
 

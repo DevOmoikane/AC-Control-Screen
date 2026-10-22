@@ -15,6 +15,7 @@ The intended AC remote is **Midea RG57A7/BGEF**, matching an earlier project usi
 - No router, cloud, server, or Internet required by default.
 - Change power, 17–30 °C, Auto/Cool/Dry/Fan/Heat, Auto/Low/Medium/High fan; LED and Turbo toggle.
 - Touch UI built with **EEZ Studio + LVGL 9.4**: three screens (climate arc, extras, network), regeneratable from the `.eez-project` without hand-written drawing code.
+- Splash screen with the project logo, shown at startup and after a period of inactivity; a tap dismisses it.
 - Infrared transmitter uses the ESP32-C3's two RMT TX channels to drive two different output GPIOs with matching carrier timing.
 - User input queues commands; adjacent state changes coalesce; application-level ACK, timeout and retry with duplicate sequence suppression.
 - One-time three-point resistive-touch calibration stored in NVS.
@@ -46,16 +47,21 @@ espnow-midea-ac/
 ├── src/
 │   ├── ir_node.cpp            # ESP32-C3 / RMT / ESPNOW receiver
 │   ├── cyd_remote.cpp         # LVGL UI + touch + ESPNOW + MQTT bridge
-│   └── ui/                    # EEZ Studio generated UI (do not edit by hand)
+│   ├── ui/                    # EEZ Studio generated UI (do not edit by hand)
+│   └── splash/                # Splash bitmap, generated from splash.png
 ├── tools/
 │   ├── acports.py             # Find a board by its USB VID:PID
 │   ├── pio.sh                 # Flash and monitor without hardcoded ports
 │   ├── ir_record.py           # Record the original remote, semi automated
 │   ├── ir_record.sh           # Same, finds a python with pyserial
-│   └── ir_audit.cpp           # Compare captures with the codec, write report
+│   ├── ir_audit.cpp           # Compare captures with the codec, write report
+│   ├── png_to_lvgl.py         # Turn a PNG into an LVGL RGB565 bitmap
+│   ├── render_splash.c        # Host renderer for the splash screen
+│   └── render-splash.sh       # Same, writes a PNG
 ├── captures/                  # Recordings of the original remote
 ├── ac-control-cyberpunk/      # EEZ Studio project (source of truth for the UI)
 │   ├── AC_Control_Cyberpunk.eez-project
+│   ├── splash.png             # Splash artwork
 │   ├── build-eez.sh           # Headless regeneration of src/ui
 │   └── INTEGRATION.md
 ├── tests/
@@ -412,6 +418,38 @@ the IR node codec in tandem.
 
 The status `IR command sent` means the IR node's hardware transmission
 completed, **not** that the AC confirmed reception.
+
+## Splash screen
+
+The CYD shows a splash screen with the `arkusnexus` logo:
+
+- once the touch calibration is done, when the app starts;
+- again whenever the screen has been left alone for 30 seconds;
+- a **tap anywhere dismisses it** and brings the normal screens back.
+
+The splash is an overlay on LVGL's top layer rather than a screen of its own,
+so it covers whichever of the three screens is active and a tap lands on the
+splash instead of on a button underneath it.
+
+The artwork lives in `ac-control-cyberpunk/splash.png` and is turned into an
+RGB565 bitmap by `tools/png_to_lvgl.py`, which scales it to the 320 × 240
+panel and crops it to the logo — the rest of the panel is the black
+background of the overlay. The bitmap ends up in flash, so the splash costs
+no RAM at runtime:
+
+```sh
+python3 tools/png_to_lvgl.py -i ac-control-cyberpunk/splash.png \
+    -o src/splash/splash_img.c --header src/splash/splash_img.h \
+    --symbol splash_img
+```
+
+Preview it **without hardware**, on top of the generated UI:
+
+```sh
+./tools/render-splash.sh /tmp/splash.png
+```
+
+The idle timeout is `SPLASH_IDLE_MS` in `src/cyd_remote.cpp`.
 
 ## Working on the UI (EEZ Studio)
 

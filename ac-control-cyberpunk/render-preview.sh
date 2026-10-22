@@ -17,6 +17,8 @@ HERE="$(cd "$(dirname "$0")" && pwd)"
 ROOT="$(cd "$HERE/.." && pwd)"
 OUT="${1:-$HERE/preview-render.png}"
 BUILD="$ROOT/.pio/host-lvgl"
+LVGL_BUILD="$BUILD/lvgl"
+APP_BUILD="$BUILD/preview"
 
 LVGL="$ROOT/.pio/libdeps/cyd_remote/lvgl"
 INC="$ROOT/include"
@@ -27,22 +29,31 @@ if [ ! -d "$LVGL" ]; then
   exit 2
 fi
 
-mkdir -p "$BUILD"
-if [ ! -f "$BUILD/lvgl.stamp" ]; then
+mkdir -p "$LVGL_BUILD" "$APP_BUILD"
+# The LVGL build depends on lv_conf.h, so the stamp has to follow it.
+STAMP="$LVGL_BUILD/lvgl.stamp"
+if [ ! -f "$STAMP" ] || [ "$INC/lv_conf.h" -nt "$STAMP" ]; then
   echo "Building LVGL for the host (once, takes a minute)..."
-  find "$LVGL/src" -name '*.c' > "$BUILD/srcs.txt"
-  ( cd "$BUILD" && gcc -std=gnu99 -O0 -w -DLV_CONF_INCLUDE_SIMPLE \
+  rm -f "$LVGL_BUILD"/*.o
+  find "$LVGL/src" -name '*.c' > "$LVGL_BUILD/srcs.txt"
+  ( cd "$LVGL_BUILD" && gcc -std=gnu99 -O0 -w -DLV_CONF_INCLUDE_SIMPLE \
       -I"$INC" -I"$LVGL" -c $(cat srcs.txt) )
-  touch "$BUILD/lvgl.stamp"
+  touch "$STAMP"
 fi
 
-cp "$HERE/render_preview.c" "$BUILD/render_preview.c"
-( cd "$BUILD" && gcc -std=gnu99 -O0 -w -DLV_CONF_INCLUDE_SIMPLE \
+cp "$HERE/render_preview.c" "$APP_BUILD/render_preview.c"
+( cd "$APP_BUILD" && gcc -std=gnu99 -O0 -w -DLV_CONF_INCLUDE_SIMPLE \
     -I"$INC" -I"$LVGL" -I"$UI" \
     -c render_preview.c "$UI/screens.c" "$UI/styles.c" "$UI/images.c" \
         "$UI/actions.c" "$UI/ui.c" )
-( cd "$BUILD" && gcc render_preview.o $(ls *.o | grep -vE 'render_preview|screens|styles|images|actions|ui\.o') \
-    screens.o styles.o images.o actions.o ui.o -o render_preview -lm )
+( cd "$APP_BUILD" && gcc *.o "$LVGL_BUILD"/*.o -o render_preview -lm )
 
-( cd "$BUILD" && ./render_preview "$OUT" )
+( cd "$APP_BUILD" && ./render_preview preview.ppm )
+python3 - "$APP_BUILD/preview.ppm" "$OUT" <<'PY'
+import sys
+from PIL import Image
+
+image = Image.open(sys.argv[1])
+image.resize((image.width * 2, image.height * 2), Image.NEAREST).save(sys.argv[2])
+PY
 echo "Wrote $OUT"

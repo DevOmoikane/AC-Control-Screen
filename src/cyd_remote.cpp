@@ -17,6 +17,7 @@
 #include "AcProtocol.h"
 #include "ui/ui.h"
 #include "ui/ac_ui_bridge.h"
+#include "splash/splash_img.h"
 
 namespace {
 
@@ -36,6 +37,12 @@ constexpr uint8_t MAX_QUEUED = 8;
 constexpr int LCD_W = 320;
 constexpr int LCD_H = 240;
 constexpr int DRAW_BUF_LINES = 20;
+
+// ------------------------------------------------------------------ splash
+// The splash artwork is a logo on a black background. It is shown when the
+// app starts and again whenever the screen has been left alone for a while,
+// and a tap anywhere dismisses it and brings the normal screens back.
+constexpr uint32_t SPLASH_IDLE_MS = 30000;
 
 // Touch calibration. The crosshairs sit CAL_INSET pixels in from the edges so
 // the whole 320x240 area is reachable; the map is extrapolated beyond them.
@@ -90,6 +97,7 @@ ac_ui_state_t lastSent{};
 bool haveLastSent = false;
 
 void publishApplied();
+void noteActivity();
 
 struct Cal {
   int32_t x0 = 0, x1 = 0, y0 = 0, y1 = 0;
@@ -497,6 +505,9 @@ void touchRead(lv_indev_t* indev, lv_indev_data_t* data) {
     rawToScreen(p.x, p.y, &lastTouchX, &lastTouchY);
     lastTouchMs = millis();
     data->state = LV_INDEV_STATE_PRESSED;
+    // Any touch counts as activity, so the idle splash does not come back
+    // while the user is working with the normal screens.
+    noteActivity();
     // Report the position of *this* reading. Setting data->point before the
     // update above hands LVGL the position of the previous poll, so a tap
     // lands on whatever was touched last.
@@ -609,6 +620,73 @@ void updateToast() {
     if (g_toast[i]) lv_obj_add_flag(g_toast[i], LV_OBJ_FLAG_HIDDEN);
   }
   g_toastUntil = 0;
+}
+
+// --------------------------------------------------------------- splash
+// The splash is an overlay on LVGL's top layer rather than a screen of its
+// own: the top layer is drawn over whatever EEZ screen is active, so the
+// splash covers the whole panel and survives the tab switches. It also
+// swallows the touch, so a tap lands on the splash and not on a button
+// underneath it.
+lv_obj_t* g_splash = nullptr;
+bool g_splashVisible = false;
+// Last time the user touched the screen; the splash comes back once the
+// remote has been left alone for SPLASH_IDLE_MS.
+uint32_t g_lastActivityMs = 0;
+
+void noteActivity() { g_lastActivityMs = millis(); }
+
+void splashDismissed(lv_event_t* e) {
+  (void)e;
+  if (!g_splash) return;
+  lv_obj_add_flag(g_splash, LV_OBJ_FLAG_HIDDEN);
+  g_splashVisible = false;
+  noteActivity();
+}
+
+void createSplash() {
+  if (!g_disp) return;
+  lv_obj_t* layer = lv_display_get_layer_top(g_disp);
+  if (!layer) return;
+
+  g_splash = lv_obj_create(layer);
+  lv_obj_remove_flag(g_splash, LV_OBJ_FLAG_SCROLLABLE);
+  lv_obj_set_size(g_splash, LCD_W, LCD_H);
+  lv_obj_set_pos(g_splash, 0, 0);
+  lv_obj_set_style_bg_color(g_splash, lv_color_hex(0x000000), LV_PART_MAIN);
+  lv_obj_set_style_bg_opa(g_splash, LV_OPA_COVER, LV_PART_MAIN);
+  lv_obj_set_style_border_width(g_splash, 0, LV_PART_MAIN);
+  lv_obj_set_style_outline_width(g_splash, 0, LV_PART_MAIN);
+  lv_obj_set_style_radius(g_splash, 0, LV_PART_MAIN);
+  lv_obj_set_style_pad_all(g_splash, 0, LV_PART_MAIN);
+  lv_obj_add_flag(g_splash, LV_OBJ_FLAG_CLICKABLE);
+  // Dismiss on release rather than on press: the release then lands on the
+  // splash as well, so the screen underneath never sees a stray press.
+  lv_obj_add_event_cb(g_splash, splashDismissed, LV_EVENT_CLICKED, nullptr);
+
+  // The artwork is cropped to the logo, the rest of the panel is the black
+  // background of the overlay.
+  lv_obj_t* art = lv_image_create(g_splash);
+  lv_image_set_src(art, &splash_img);
+  lv_obj_set_pos(art, SPLASH_IMG_X, SPLASH_IMG_Y);
+
+  lv_obj_add_flag(g_splash, LV_OBJ_FLAG_HIDDEN);
+  g_splashVisible = false;
+  noteActivity();
+}
+
+void showSplash() {
+  if (!g_splash) return;
+  lv_obj_clear_flag(g_splash, LV_OBJ_FLAG_HIDDEN);
+  lv_obj_move_foreground(g_splash);
+  g_splashVisible = true;
+}
+
+// Bring the splash back once the remote has been idle for a while.
+void updateSplash() {
+  if (!g_splash || g_splashVisible) return;
+  if (millis() - g_lastActivityMs < SPLASH_IDLE_MS) return;
+  showSplash();
 }
 
 // Force LVGL's default theme to the dark palette with the project's own
@@ -864,6 +942,11 @@ void setup() {
   pushDesiredToUi();
   reportUiState();
 
+  // The splash comes up once the calibration is done, and a tap on it brings
+  // the normal screens back.
+  createSplash();
+  showSplash();
+
   nextSeq = esp_random();
   setupRadio();
   ac_ui_set_link_status(false, "Looking for ESP32-C3 transmitter");
@@ -874,6 +957,7 @@ void loop() {
     const char key = static_cast<char>(Serial.read());
     if (key == 'c' || key == 'C') {
       calibrateTouch();
+      noteActivity();
       if (g_disp) lv_refr_now(g_disp); // repaint over the calibration screen
     }
   }
@@ -909,6 +993,7 @@ void loop() {
   if (g_disp) {
     ui_tick();
     updateToast();
+    updateSplash();
     lv_timer_handler();
   }
   delay(5);
