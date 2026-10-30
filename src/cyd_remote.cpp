@@ -98,6 +98,7 @@ bool haveLastSent = false;
 
 void publishApplied();
 void noteActivity();
+String describeCommand(const ac::Frame& f);
 
 struct Cal {
   int32_t x0 = 0, x1 = 0, y0 = 0, y1 = 0;
@@ -221,6 +222,8 @@ void updateCommands() {
     --queueCount;
     attempts = 0;
     hasPending = true;
+    Serial.printf("sending: seq=%lu, %s\n", (unsigned long)pending.seq,
+                  describeCommand(pending).c_str());
     sendPending();
   }
 }
@@ -242,6 +245,18 @@ String fanName(uint8_t value) {
     case ac::Fan::Medium: return "medium";
     case ac::Fan::High: return "high";
     default: return "auto";
+  }
+}
+
+String describeCommand(const ac::Frame& f) {
+  switch (static_cast<ac::Action>(f.action)) {
+    case ac::Action::SetState:
+      if (!f.state.power) return "off";
+      return "on, " + modeName(f.state.mode) + ", " + String((int)f.state.tempC) +
+             " degrees, " + fanName(f.state.fan) + " fan speed";
+    case ac::Action::LedToggle: return "LED toggle";
+    case ac::Action::TurboToggle: return "turbo toggle";
+    default: return "unknown command";
   }
 }
 
