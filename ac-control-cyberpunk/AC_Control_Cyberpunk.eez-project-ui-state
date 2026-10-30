@@ -1071,8 +1071,8 @@
       },
       "transform": {
         "translate": {
-          "x": -296.1666666666667,
-          "y": -229.96926406926403
+          "x": -174.17057291666669,
+          "y": -77.66067031926403
         },
         "scale": 1.75
       },
@@ -1131,7 +1131,9 @@
           "8": {},
           "9": {},
           "10": {},
-          "12": {},
+          "12": {
+            "0": {}
+          },
           "13": {},
           "14": {}
         }
@@ -1142,6 +1144,25 @@
           "y": -229.9375
         },
         "scale": 1.75
+      },
+      "timeline": {
+        "isEditorActive": false,
+        "position": 0,
+        "secondToPx": 200,
+        "scrollLeft": 0
+      }
+    },
+    "[AC_Control_Cyberpunk.eez-project]:/userPages/3[flow-state]": {
+      "selectionFront": {},
+      "selectionBack": {
+        "0": {}
+      },
+      "transform": {
+        "translate": {
+          "x": -160,
+          "y": -120
+        },
+        "scale": 0.9
       },
       "timeline": {
         "isEditorActive": false,
